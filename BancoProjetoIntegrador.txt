@@ -1,0 +1,47 @@
+CREATE TABLE usuario (
+	cod_usuario serial,
+	nome varchar(30),
+	email varchar(30),
+	senha varchar(15),
+	idade varchar(3),
+	pais varchar(20),
+	cidade varchar(20),
+	primary key(cod_usuario)
+);
+
+CREATE TABLE gerente (
+	cod_gerente serial,
+	cod_usuario int,
+	primary key(cod_apreciador)
+	foreign key(cod_usuario) references usuario(cod_usuario)
+);
+
+CREATE TABLE apreciador (
+	cod_apreciador serial,
+	cod_user int,
+	primary key(cod_apreciador)
+	foreign key(cod_usuario) references usuario(cod_usuario)
+);
+
+CREATE TABLE artista_fotografo (
+	cod_artist_foto serial,
+	cod_user int,
+	tag varchar(20),
+	contato varchar(100),
+	linguagem varchar(20),
+	primary key(cod_artist_foto),
+	foreign key(cod_usuario) references usuario(cod_usuario)
+);
+
+CREATE TABLE tabalho_obra (
+	cod_obra serial,
+	nome varchar(20),
+	pais varchar(20),
+	cidade varchar(20),
+	cor_predominante(20),
+	artista varchar(20),
+	descricao varchar(300),
+	linguagem varchar(20),
+	primary key(cod_obra)
+);	
+		
