@@ -1,0 +1,13 @@
+{
+    "elements": {
+        "p": {}
+    },
+    "attributes": {
+        "integrity": {
+            "context": "script"
+        },
+        "x-placement": {
+            "context": "div"
+        }
+    }
+}
