@@ -38,22 +38,25 @@ public class CadastraApreciador extends HttpServlet {
         String idade = req.getParameter("idade");
         String pais = req.getParameter("pais");
         String cidade = req.getParameter("cidade");
-       
-        System.out.println("teste: "+confirmaSenha);
-        System.out.println("teste2: "+pais);
-        System.out.println("teste3: "+cidade);
+  
         Apreciador ap = new Apreciador(nome, senha, email, idade, "ap");
         
-        boolean retorno = new ApreciadorDAO().create(ap);
-        if(retorno){
+        int retorno = new ApreciadorDAO().create(ap);
+        if(retorno >= 1){
             System.out.println("Cadastrou!");
             req.setAttribute("mensagem","Sucesso no cadastro");
             RequestDispatcher disp = req.getRequestDispatcher("index.html");
             disp.forward(req,resp);
-        }else{//FAZER PAGINA DE ERRO!!!!!      
-            req.setAttribute("mensagem","Falha no cadastro, Tente Novamente!");
-            RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoC.jsp");
-            disp.forward(req,resp);
-        }
+        }else if(retorno == -1){//FAZER PAGINA DE ERRO!!!!!   
+                System.out.println("Já existe cadastro com esse user, Tente Novamente!");
+                req.setAttribute("mensagem","Já existe cadastro com esse user, Tente Novamente!");
+                RequestDispatcher disp = req.getRequestDispatcher("index.html");
+                disp.forward(req,resp);
+              }else {//FAZER PAGINA DE ERRO!!!!!  
+                    System.out.println("Falha no cadastro, Tente Novamente!");
+                    req.setAttribute("mensagem","Falha no cadastro, Tente Novamente!");
+                    RequestDispatcher disp = req.getRequestDispatcher("index.html");
+                    disp.forward(req,resp);
+              }
     }
 }

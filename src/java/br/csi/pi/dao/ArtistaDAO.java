@@ -14,27 +14,33 @@ import java.util.ArrayList;
  * @author Juan
  */
 public class ArtistaDAO {
-    public boolean create(ArtistaFotografo af) {
+    public int create(ArtistaFotografo af) {
         int cod_usuario = new UsuarioDAO().create(af.getNome(),af.getSenha(),af.getEmail(),af.getIdade(),af.getTipo());                        
-        if(cod_usuario < 1){
-            return false;
+        
+        if(cod_usuario == 0){
+            System.out.println("testando 0");
+            return 0;
+        }else if(cod_usuario == -1){
+                    System.out.println("testando -1");
+                    return -1;
+                  }else{
+                        try(Connection conn = new ConectaPostgres().getConexao()){
+                            String sql = "INSERT INTO artista_fotografo(cod_usuario, tag, contato, linguagem, descricao_artist_foto)"
+                                          + "VALUES (?,?,?,?,?)";
+                            PreparedStatement pre = conn.prepareStatement(sql);
+                            pre.setInt(1, cod_usuario);
+                            pre.setString(2, af.getTag());
+                            pre.setString(3, af.getContato());
+                            pre.setString(4, af.getLinguagem());
+                            pre.setString(5, af.getDescricao_artist_foto());
+                            if (pre.executeUpdate() > 0){
+                                return 1;
+                            };                        
+                        }catch(SQLException e){
+                            e.printStackTrace();
+                        }      
         }
-        try(Connection conn = new ConectaPostgres().getConexao()){
-            String sql = "INSERT INTO artista_fotografo(cod_usuario, tag, contato, linguagem, descricao_artist_foto)"
-                          + "VALUES (?,?,?,?,?)";
-            PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, cod_usuario);
-            pre.setString(2, af.getTag());
-            pre.setString(3, af.getContato());
-            pre.setString(4, af.getLinguagem());
-            pre.setString(5, af.getDescricao_artist_foto());
-            if (pre.executeUpdate() > 0){
-                return true;
-            };                        
-        }catch(SQLException e){
-            e.printStackTrace();
-        }                
-        return false;        
+        return 0;        
     }
     
     public ArtistaFotografo read(int cod_usuario) {

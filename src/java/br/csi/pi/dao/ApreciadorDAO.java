@@ -12,24 +12,28 @@ import java.sql.SQLException;
  * @author Juan
  */
 public class ApreciadorDAO {
-    public boolean create(Apreciador a) {
+    public int create(Apreciador a) {
         int cod_usuario = new UsuarioDAO().create(a.getNome(),a.getSenha(),a.getEmail(),a.getIdade(),a.getTipo());                        
-        System.out.println("AQUI2:"+cod_usuario);
-        if(cod_usuario < 1){
-            return false;
-        }
-        System.out.println("AQUI3:"+cod_usuario);
-        try(Connection conn = new ConectaPostgres().getConexao()){
-            String sql = "INSERT INTO apreciador (cod_usuario) VALUES (?)";
-            PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, cod_usuario);
-            if (pre.executeUpdate() > 0){
-                return true;
-            };                        
-        }catch(SQLException e){
-            e.printStackTrace();
-        }                
-        return false;        
+       
+        if(cod_usuario == 0){
+            System.out.println("testando 0");
+            return 0;
+        }else if(cod_usuario == -1){
+                    System.out.println("testando -1");
+                    return -1;
+                  }else{
+                        try(Connection conn = new ConectaPostgres().getConexao()){
+                            String sql = "INSERT INTO apreciador (cod_usuario) VALUES (?)";
+                            PreparedStatement pre = conn.prepareStatement(sql);
+                            pre.setInt(1, cod_usuario);
+                            if (pre.executeUpdate() > 0){
+                                return 1;
+                            };                        
+                        }catch(SQLException e){
+                            e.printStackTrace();
+                        }   
+                    }
+        return 0;        
     }
     
     public Apreciador read(int cod_usuario) {

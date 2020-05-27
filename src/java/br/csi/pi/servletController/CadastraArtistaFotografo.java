@@ -62,17 +62,21 @@ public class CadastraArtistaFotografo extends HttpServlet {
                                                    "art");
         
         System.out.println("Vaiii");
-        boolean retorno = new ArtistaDAO().create(af);
-        System.out.println("Vaiii222");
-        if(retorno){
-            System.out.println("Cadastrou poura");
-            //req.setAttribute("nome", nome);
+        int retorno = new ArtistaDAO().create(af);
+        if(retorno >= 1){
+            System.out.println("Cadastrou!");
+            req.setAttribute("mensagem","Sucesso no cadastro");
             RequestDispatcher disp = req.getRequestDispatcher("index.html");
             disp.forward(req,resp);
-        }else{            
-            req.setAttribute("mensagem","Falha no cadastro, Tente Novamente!");
-            RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoC.jsp");
-            disp.forward(req,resp);
-        }
+        }else if(retorno == -1){//FAZER PAGINA DE ERRO!!!!!      
+                req.setAttribute("mensagem","Já existe cadastro com esse user, Tente Novamente!");
+                RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoC.jsp");
+                disp.forward(req,resp);
+              }else {//FAZER PAGINA DE ERRO!!!!!  
+                    System.out.println("Falha no cadastro, Tente Novamente!");
+                    req.setAttribute("mensagem","Falha no cadastro, Tente Novamente!");
+                    RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoC.jsp");
+                    disp.forward(req,resp);
+              }
     }
 }

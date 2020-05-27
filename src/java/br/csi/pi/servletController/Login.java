@@ -41,7 +41,6 @@ public class Login extends HttpServlet {
         String autenticado = new LoginDAO().autenticar(login, senha);
         RequestDispatcher disp;
         
-        System.out.println("TESTE2");
         String apreciador = "ap";
         String artista = "art";
         String gerente = "g";

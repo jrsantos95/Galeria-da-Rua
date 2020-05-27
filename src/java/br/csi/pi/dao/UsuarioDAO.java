@@ -24,14 +24,35 @@ public class UsuarioDAO {
         }
     }*/ //main para testes de CRUD - cadastra e exclui objetos do banco
     
+    public int read(String email) {
+        try (Connection conn = new ConectaPostgres().getConexao()) {
+            String sql = "SELECT * FROM usuario WHERE email = ?";
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, email);
+            ResultSet rs = pre.executeQuery();
+            while(rs.next()){
+                Usuario u = new Usuario(rs.getInt("cod_usuario"), 
+                                        rs.getString("nome"), 
+                                        rs.getString("senha"), 
+                                        rs.getString("email"), 
+                                        rs.getString("idade"),
+                                        rs.getString("tipo"));
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 1;
+    }
+    
     public Usuario read(int cod) {
         try (Connection conn = new ConectaPostgres().getConexao()) {
             String sql = "SELECT * FROM usuario WHERE cod_usuario = ?";
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, cod);
             ResultSet rs = pre.executeQuery();
-            while (rs.next()) {
-                Usuario u = new Usuario(cod, 
+            while(rs.next()){
+                Usuario u = new Usuario(rs.getInt("cod_usuario"), 
                                         rs.getString("nome"), 
                                         rs.getString("senha"), 
                                         rs.getString("email"), 
@@ -67,26 +88,32 @@ public class UsuarioDAO {
         return null;
     }
     
-    public int create(String nome, String senha, String email, String idade, String tipo){       
-         try (Connection conn = new ConectaPostgres().getConexao()) {
-            String sql = "INSERT INTO usuario(nome, senha, email, idade, tipo) VALUES(?, ?, ?, ?, ?)";
-            PreparedStatement pre = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            pre.setString(1, nome);
-            pre.setString(2, senha);
-            pre.setString(3, email);
-            pre.setString(4, idade);
-            pre.setString(5, tipo);
-            pre.executeUpdate();
-            ResultSet rs = pre.getGeneratedKeys();
-            rs.next();            
-            
-            if(rs.getInt(1) > 0){
-               System.out.println("AQUI:"+rs.getInt(1));
-               return rs.getInt(1);
+    public int create(String nome, String senha, String email, String idade, String tipo){
+        int u = new UsuarioDAO().read(email);
+        
+        if(u == 1){
+            try (Connection conn = new ConectaPostgres().getConexao()) {
+                String sql = "INSERT INTO usuario(nome, senha, email, idade, tipo) VALUES(?, ?, ?, ?, ?)";
+                PreparedStatement pre = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                pre.setString(1, nome);
+                pre.setString(2, senha);
+                pre.setString(3, email);
+                pre.setString(4, idade);
+                pre.setString(5, tipo);
+                pre.executeUpdate();
+                ResultSet rs = pre.getGeneratedKeys();
+                rs.next();            
+
+                if(rs.getInt(1) > 0){
+                   System.out.println("AQUI:"+rs.getInt(1));
+                   return rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        }else{
+               return -1;
+              }
         return 0;
     }
     
