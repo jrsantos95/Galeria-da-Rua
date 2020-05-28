@@ -104,8 +104,8 @@ public class ArtistaDAO {
              }
     }
     
-    public boolean delete(ArtistaFotografo af) {
-        ArrayList<Obra> obras = new ObraDAO().getObras_contem_artista_foto(af.getCod_artistFoto());
+    public boolean delete(Usuario af) {
+        /*ArrayList<Obra> obras = new ObraDAO().getObras_contem_artista_foto(af.getCod_artistFoto());
         for(int i = 0; i < obras.size(); i++){
             Obra o = obras.get(i);
             boolean retorno = new ObraDAO().delete(o.getCod_obra());
@@ -114,13 +114,16 @@ public class ArtistaDAO {
             }else{
                     System.out.println("Erro ao excluir obras da tabela obra");
                  }
-        }
+        }*/
+        System.out.println("Teste delete2");
         try (Connection conn = new ConectaPostgres().getConexao()) {
-                String sql = "DELETE FROM artista_fotografo WHERE cod_artista_foto = ?";
+                String sql = "DELETE FROM artista_fotografo WHERE cod_usuario = ?";
                 PreparedStatement pre = conn.prepareStatement(sql);
-                pre.setInt(1, af.getCod_artistFoto());
+                pre.setInt(1, af.getCod_usuario());
                 if (pre.executeUpdate() > 0){
+                    System.out.println("Teste delete2");
                     boolean retorno = new UsuarioDAO().delete(af.getCod_usuario());
+                    System.out.println("Teste delete3");
                     if(retorno){
                         System.out.println("ArtistaFotografo deletado com sucesso");
                         return true;

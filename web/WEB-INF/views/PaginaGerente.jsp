@@ -14,26 +14,70 @@
     <!-- Barra de navegação -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
         <div class="container">
-            <a>
+            <a class="navbar-brand" href="http://localhost:8080/PI_GaleriaRua/pg_gerente">
                 <svg class="bi bi-layout-wtf" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M5 1H1v8h4V1zM1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm13 2H9v5h5V2zM9 1a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9zM5 13H3v2h2v-2zm-2-1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3zm12-1H9v2h6v-2zm-6-1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H9z"/>
                 </svg>
                 Galeria da Rua
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon">qq</span>
             </button>
+            <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/ListaUsuario">Usuarios</a>
+                <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/ModificaUsuario">Obras</a>
+                <a class="nav-item nav-link" href="#">P</a>
+                <a class="nav-item nav-link" href="#">D</a>
+            </div>
         </div>
         <a>${sessionScope['usuarioLogado'].nome}</a>
-        <a class="btn btn-default navbar-btn" href="http://localhost:8080/PI_GaleriaRua/pg_index">Logout</a>
+        <a class="btn btn-default navbar-btn" href="http://localhost:8080/PI_GaleriaRua/logout">Logout</a>
     </nav>
     <!-- Barra de navegação -->
   </head>
   
   <body>
-      
+    
+    <div class="container md-12">
+        <div class="row">
+          <div class="col-md-12">
+                <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="usuarios" items="${usuarios}">
+                            <c:set var="codigo_lista" value="${codigo_lista+1}"/>
+                                <tr>
+                                  <td>${codigo_lista}</td>
+                                  <td>${usuarios.getNome()}</td>
+                                  <td>${usuarios.getEmail()}</td>
+                                  <!--
+                                  <td>${usuarios.getCod_usuario()}</td>
+                                  -->
+                                  <td>${usuarios.getTipo()}</td>
+                                  <td>
+                                      <a href="http://localhost:8080/PI_GaleriaRua/ModificaUsuario?cod_usuario=${usuarios.getCod_usuario()}" 
+                                         class="btn btn-warning">Modificar</a>
+                                      <a href="http://localhost:8080/PI_GaleriaRua/DeletaUsuario?cod_usuario=${usuarios.getCod_usuario()}" 
+                                         class="btn btn-danger">Deletar</a>
+                                  </td>
+                                </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+                      
     <!-- Footer -->
-    <div class="container">
+    <div class="container my-5 mb-5">
         <nav class="navbar navbar-expand-lg navbar-dark bg-light">
           <a class="col-12 text-center">Acompanhe nossas redes sociais</a>
         </nav>

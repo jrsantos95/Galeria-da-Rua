@@ -16,7 +16,7 @@ public class LoginDAO{
            ResultSet rs = pStmt.executeQuery();
            while(rs.next()){
                String tipo = rs.getString("tipo");
-               System.out.println("O TIPO DO USUARIO É: "+tipo);
+               //System.out.println("O TIPO DO USUARIO É: "+tipo);
                return tipo;
            }   
        }catch(SQLException e){

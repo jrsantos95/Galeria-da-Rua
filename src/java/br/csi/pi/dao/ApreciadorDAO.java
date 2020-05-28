@@ -66,6 +66,8 @@ public class ApreciadorDAO {
                                                   a.getEmail(),
                                                   a.getIdade(),
                                                   a.getTipo());
+        
+        System.out.println("1Modifica Apreciador: "+retorno);
         if(retorno){
             System.out.println("Apreciador atualizado com sucesso");
             return true;
@@ -75,11 +77,31 @@ public class ApreciadorDAO {
              }
     }
     
-    public boolean delete(Apreciador a) {
+    public boolean update(){
+        boolean retorno = new UsuarioDAO().update(a.getCod_usuario(),
+                                                  a.getNome(),
+                                                  a.getSenha(),
+                                                  a.getEmail(),
+                                                  a.getIdade(),
+                                                  a.getTipo());
+        
+        System.out.println("1Modifica Apreciador: "+retorno);
+        if(retorno){
+            System.out.println("Apreciador atualizado com sucesso");
+            return true;
+        }else{
+             System.out.println("Falha ao atualizar apreciador");
+             return false;
+             }
+    }
+    
+    
+    
+    public boolean delete(Usuario a) {
         try (Connection conn = new ConectaPostgres().getConexao()) {
-                String sql = "DELETE FROM apreciador WHERE cod_apreciador = ?";
+                String sql = "DELETE FROM apreciador WHERE cod_usuario = ?";
                 PreparedStatement pre = conn.prepareStatement(sql);
-                pre.setInt(1, a.getCod_apreciador());
+                pre.setInt(1, a.getCod_usuario());
                 
                 if (pre.executeUpdate() > 0){
                     boolean retorno = new UsuarioDAO().delete(a.getCod_usuario());

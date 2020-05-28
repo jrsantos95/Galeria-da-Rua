@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import br.csi.pi.modelo.Usuario;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -155,8 +156,8 @@ public class UsuarioDAO {
     }
     
     public boolean delete(int cod) {
-        boolean retorno = new LocalizaUsuarioDAO().delete(cod, "u");
-        if(retorno){
+        /*boolean retorno = new LocalizaUsuarioDAO().delete(cod, "u");
+        if(retorno){*/
             try (Connection conn = new ConectaPostgres().getConexao()) {
                 String sql = "DELETE FROM usuario WHERE cod_usuario = ?";
                 PreparedStatement pre = conn.prepareStatement(sql);
@@ -167,7 +168,30 @@ public class UsuarioDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
         return false;
+    }
+        
+    
+
+    public ArrayList<Usuario> getUsuarios() {
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+        try (Connection conn = new ConectaPostgres().getConexao()) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+            while (rs.next()) {
+                if(!"g".equals(rs.getString("tipo"))){
+                    Usuario us = new Usuario(rs.getInt("cod_usuario"), 
+                                             rs.getString("nome"), 
+                                             rs.getString("senha"), 
+                                             rs.getString("email"), 
+                                             rs.getString("idade"), 
+                                             rs.getString("tipo"));
+                    usuarios.add(us);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return usuarios;
     }
 }

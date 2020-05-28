@@ -36,8 +36,7 @@ public class Login extends HttpServlet {
         
         String login = req.getParameter("login");
         String senha = req.getParameter("senha");
-        
-        System.out.println("TESTE1");
+
         String autenticado = new LoginDAO().autenticar(login, senha);
         RequestDispatcher disp;
         
@@ -57,14 +56,11 @@ public class Login extends HttpServlet {
                  disp = req.getRequestDispatcher("index.html");
                  disp.forward(req, resp); 
               }else if(autenticado.equals(gerente)){
-                        System.out.println("TESTE3");
                         HttpSession sessao = req.getSession();
                         sessao.setAttribute("usuarioLogado", new UsuarioDAO().read(login, senha));
-                    
-                        disp = req.getRequestDispatcher("WEB-INF/views/PaginaGerente.jsp");
-                        disp.forward(req, resp);            
+                        
+                        resp.sendRedirect("http://localhost:8080/PI_GaleriaRua/ListaUsuario");
                     }else{
-                          req.setAttribute("mensagem","Usuario ou senha incorretos!, Tente Novamente.");
                           disp = req.getRequestDispatcher("index.html");
                           disp.forward(req, resp); 
                          }
