@@ -78,16 +78,15 @@ public class ArtistaDAO {
                                                   af.getIdade(),
                                                   af.getTipo());       
         if(retorno){
-            System.out.println("Usuario de artistaFototgrafo atualizado com sucesso");
             try (Connection conn = new ConectaPostgres().getConexao()) {
                 String sql = "UPDATE artista_fotografo SET tag = ?, contato = ?, linguagem = ?, descricao_artist_foto = ? "
-                              + "WHERE cod_usuario = ?";
+                              +"WHERE cod_usuario = ?";
                 PreparedStatement pre = conn.prepareStatement(sql);
                 pre.setString(1, af.getTag());
                 pre.setString(2, af.getContato());
                 pre.setString(3, af.getLinguagem());
                 pre.setString(4, af.getDescricao_artist_foto());
-                pre.setInt(7, af.getCod_usuario());
+                pre.setInt(5, af.getCod_usuario());
                 
                 if (pre.executeUpdate() > 0) {
                     System.out.println("ArtistaFototgrafo atualizado com sucesso");

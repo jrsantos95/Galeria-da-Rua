@@ -27,7 +27,6 @@ public class ModificaUsuario extends HttpServlet {
         int cod_usuario = Integer.parseInt(req.getParameter("cod_usuario"));
         Usuario u = new UsuarioDAO().read(cod_usuario);
         
-        System.out.println("Cod_modifica: "+u.getCod_usuario());
         boolean retorno = false;
 
         if("ap".equals(u.getTipo())){
@@ -36,25 +35,25 @@ public class ModificaUsuario extends HttpServlet {
            req.setAttribute("email",u.getEmail());
            req.setAttribute("idade",u.getIdade());
            req.setAttribute("senha",u.getSenha());
-           
-           System.out.println("Teste 1");
+
            RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/ModificaApreciador.jsp");
            disp.forward(req, resp);
         }else if("art".equals(u.getTipo())){
                 ArtistaFotografo af = new ArtistaDAO().read(cod_usuario);
-                req.setAttribute("nome",af.getNome());
-                req.setAttribute("email",af.getEmail());
-                req.setAttribute("idade",af.getIdade());
-                req.setAttribute("senha",af.getSenha());
-                req.setAttribute("tag",af.getTag());
-                req.setAttribute("contato",af.getContato());
-                req.setAttribute("linguagem",af.getLinguagem());
-                req.setAttribute("desc_artist_foto",af.getDescricao_artist_foto());
+                req.setAttribute("cod_usuario", cod_usuario);
+                req.setAttribute("nome", af.getNome());
+                req.setAttribute("email", af.getEmail());
+                req.setAttribute("idade", af.getIdade());
+                req.setAttribute("senha", af.getSenha());
+                req.setAttribute("tag", af.getTag());
+                req.setAttribute("contato", af.getContato());
+                req.setAttribute("linguagem", af.getLinguagem());
+                req.setAttribute("desc_artist_foto", af.getDescricao_artist_foto());
                 
                 RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/ModificaArtista.jsp");
                 disp.forward(req, resp);
               }else{
-                    RequestDispatcher disp = req.getRequestDispatcher("index.html");
+                    RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaGerente.jsp");
                     disp.forward(req, resp);
                    }
     }

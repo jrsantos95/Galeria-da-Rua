@@ -38,7 +38,6 @@
   </head>
   
   <body>
-
     <!-- Dados de cadastro -->
     <div class="container">
         <div class="row my-5 mb-5">    
@@ -48,45 +47,44 @@
             <div class="col-10">
                 <div class="mx-auto col-lg-12 col-15">
                     <!-- Formulario/Dados de cadastro -->
-                    <form role="form" action="ModificaApreciador" method="POST">
+                    <form role="form" action="ModificaApreciador?cod_usuario=${cod_usuario}" method="POST">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="pessoa" role="tabpanel" aria-labelledby="home-tab">
-                                    <div class="was-validated">                            
-                                      <div class="form-group col-md-13 mb-2">
-                                          <label for="validationTooltip01">Nome</label>
-                                          <input type="text" class="form-control" name="nome" placeholder="${cod_usuario}" required>
-                                      </div> 
+                                <fieldset disabled>
+                                    <div class="form-group">
+                                      <label for="disabledTextInput">Codigo</label>
+                                      <input type="text" placeholder="${cod_usuario}"
+                                             class="form-control">
                                     </div>
-                                
-                                    <div class="was-validated">                            
-                                      <div class="form-group col-md-13 mb-2">
-                                          <label for="validationTooltip01">Nome</label>
-                                          <input type="text" class="form-control" name="nome" placeholder="${nome}" required>
-                                      </div> 
-                                    </div>
+                                </fieldset>
 
-                                    <div class="was-validated mb-2">
-                                        <label for="exampleFormControlInput1">Email address</label>
-                                        <input type="email" class="form-control" name="email" placeholder="${email}" required>
-                                    </div>
+                                <div class="was-validated mb-2">
+                                    <label for="exampleFormControlInput1">Nome</label>
+                                    <input type="text" class="form-control" name="nome" placeholder="${nome}" required>
+                                </div> 
 
-                                    <div class="was-validated input-grup date">                            
-                                      <div class="col-md-13 mb-2">
-                                          <label for="validationTooltip01">Data de Nascimento</label>
-                                          <input type="data" class="form-control" name="idade" placeholder="${idade}" required>
-                                      </div> 
+                                <div class="was-validated mb-2">
+                                    <label for="exampleFormControlInput1">Email address</label>
+                                    <input type="email" class="form-control" name="email" placeholder="${email}" required>
+                                </div>
+
+                                <div class="was-validated input-grup date">                            
+                                    <div class="col-md-13 mb-2">
+                                        <label for="validationTooltip01">Data de Nascimento</label>
+                                        <input type="data" class="form-control" name="idade" placeholder="${idade}" required>
                                     </div> 
+                                </div> 
 
-                                    <div class="was-validated">
-                                      <div class="col-md-13"> 
-                                          <label for="form19">Senha</label> 
-                                          <input type="password" class="form-control" name="senha" placeholder="${senha}" required> 
-                                      </div>
-                                      <div class="form-group col-md-13"> 
-                                          <label for="form20">Confirmar Senha</label> 
-                                          <input type="password" class="form-control" name="confirmaSenha" placeholder="${senha}" required> 
-                                      </div>
+                                <div class="was-validated">
+                                    <div class="col-md-13"> 
+                                        <label for="form19">Senha</label> 
+                                        <input type="password" class="form-control" name="senha" placeholder="${senha}" required> 
                                     </div>
+                                    <div class="form-group col-md-13"> 
+                                        <label for="form20">Confirmar Senha</label> 
+                                        <input type="password" class="form-control" name="confirmaSenha" placeholder="${senha}" required> 
+                                    </div>
+                                </div>
                             </div>
                         </div>    
                     <button type="submit" class="btn btn-dark">Modificar</button>

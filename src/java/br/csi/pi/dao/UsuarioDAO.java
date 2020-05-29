@@ -138,7 +138,8 @@ public class UsuarioDAO {
     
     public boolean update(int cod_usuario, String nome, String senha, String email, String idade, String tipo) {
         try (Connection conn = new ConectaPostgres().getConexao()) {
-            String sql = "UPDATE usuario SET nome = ?, senha = ?, email = ?, idade = ?, tipo = ? WHERE cod_usuario = ?";
+            String sql = "UPDATE usuario SET nome = ?, senha = ?, email = ?, idade = ?, tipo = ?"
+                          +"WHERE cod_usuario = ?";
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, nome);
             pre.setString(2, senha);

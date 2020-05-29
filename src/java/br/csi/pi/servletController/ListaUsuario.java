@@ -21,11 +21,9 @@ public class ListaUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
                          throws ServletException, IOException {
-        System.out.println("Teste simples");
         ArrayList<Usuario> us = new UsuarioDAO().getUsuarios();
         
         req.setAttribute("usuarios", us);
-        
         RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaGerente.jsp");
         disp.forward(req, resp);
     }

@@ -3,6 +3,7 @@ package br.csi.pi.servletController;
 
 import br.csi.pi.dao.ApreciadorDAO;
 import br.csi.pi.modelo.Apreciador;
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -33,16 +34,15 @@ public class ModificaApreciador extends HttpServlet {
         PrintWriter resposta = resp.getWriter();
         
         //PEGAR ATRIBULO COD DO CLIENTE PARA DAR UPDATE
-        String cod_usuario = req.getParameter("cod_usuario");
+        int cod_usuario = Integer.parseInt(req.getParameter("cod_usuario"));
         String nome = req.getParameter("nome");
         String senha = req.getParameter("senha");
         String email = req.getParameter("email");
         String idade = req.getParameter("idade");
         
-        //Tranformar o cod_usuario em int para dar update no apreciador
-        Apreciador a = new Apreciador(cod_usuario, nome, senha, email, idade, "ap");
+        Apreciador a = new Apreciador(cod_usuario , nome, senha, email, idade, "ap");
         boolean retorno = new ApreciadorDAO().update(a);
-        System.out.println("Modifica Apreciador: "+retorno);
+
         if(retorno){
            req.setAttribute("mensagem","Modificado com sucesso");
            RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoG.jsp");

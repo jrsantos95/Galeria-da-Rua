@@ -16,10 +16,8 @@ public class ApreciadorDAO {
         int cod_usuario = new UsuarioDAO().create(a.getNome(),a.getSenha(),a.getEmail(),a.getIdade(),a.getTipo());                        
        
         if(cod_usuario == 0){
-            System.out.println("testando 0");
             return 0;
         }else if(cod_usuario == -1){
-                    System.out.println("testando -1");
                     return -1;
                   }else{
                         try(Connection conn = new ConectaPostgres().getConexao()){
@@ -67,7 +65,6 @@ public class ApreciadorDAO {
                                                   a.getIdade(),
                                                   a.getTipo());
         
-        System.out.println("1Modifica Apreciador: "+retorno);
         if(retorno){
             System.out.println("Apreciador atualizado com sucesso");
             return true;
@@ -76,26 +73,6 @@ public class ApreciadorDAO {
              return false;
              }
     }
-    
-    public boolean update(){
-        boolean retorno = new UsuarioDAO().update(a.getCod_usuario(),
-                                                  a.getNome(),
-                                                  a.getSenha(),
-                                                  a.getEmail(),
-                                                  a.getIdade(),
-                                                  a.getTipo());
-        
-        System.out.println("1Modifica Apreciador: "+retorno);
-        if(retorno){
-            System.out.println("Apreciador atualizado com sucesso");
-            return true;
-        }else{
-             System.out.println("Falha ao atualizar apreciador");
-             return false;
-             }
-    }
-    
-    
     
     public boolean delete(Usuario a) {
         try (Connection conn = new ConectaPostgres().getConexao()) {
