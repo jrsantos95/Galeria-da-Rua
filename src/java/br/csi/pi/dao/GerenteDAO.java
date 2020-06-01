@@ -22,6 +22,7 @@ public class GerenteDAO {
             System.out.println("Gerente não cadastrado...erro!");
         }
     }
+    
     public boolean create(Gerente g) {
         int cod_usuario = new UsuarioDAO().create(g.getNome(),g.getSenha(),g.getEmail(),g.getIdade(),g.getTipo());                        
         if(cod_usuario < 1){

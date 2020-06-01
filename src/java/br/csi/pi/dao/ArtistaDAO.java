@@ -1,13 +1,11 @@
 package br.csi.pi.dao;
 
 import br.csi.pi.modelo.ArtistaFotografo;
-import br.csi.pi.modelo.Obra;
 import br.csi.pi.modelo.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  *
@@ -18,7 +16,6 @@ public class ArtistaDAO {
         int cod_usuario = new UsuarioDAO().create(af.getNome(),af.getSenha(),af.getEmail(),af.getIdade(),af.getTipo());                        
         
         if(cod_usuario == 0){
-            System.out.println("testando 0");
             return 0;
         }else if(cod_usuario == -1){
                     System.out.println("testando -1");

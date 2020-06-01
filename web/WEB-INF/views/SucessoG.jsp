@@ -14,14 +14,16 @@
       <!-- Barra de navegação -->
       <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
           <div class="container">
-              <a class="navbar-brand" href="http://localhost:8080/PI_GaleriaRua/ListaUsuario">
-                  <svg class="bi bi-layout-wtf" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" d="M5 1H1v8h4V1zM1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm13 2H9v5h5V2zM9 1a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9zM5 13H3v2h2v-2zm-2-1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3zm12-1H9v2h6v-2zm-6-1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H9z"/>
-                  </svg>
-                  Galeria da Rua
-              </a>
+              <a>${sessionScope['usuarioLogado'].nome}</a>
+              <a class="btn btn-default navbar-btn" href="http://localhost:8080/PI_GaleriaRua/logout">
+                Logout
+                <svg class="bi bi-box-arrow-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.354 11.354a.5.5 0 0 0 0-.708L1.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
+                    <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0 0 1h9a.5.5 0 0 0 .5-.5z"/>
+                    <path fill-rule="evenodd" d="M14 13.5a1.5 1.5 0 0 0 1.5-1.5V4A1.5 1.5 0 0 0 14 2.5H7A1.5 1.5 0 0 0 5.5 4v1.5a.5.5 0 0 0 1 0V4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5H7a.5.5 0 0 1-.5-.5v-1.5a.5.5 0 0 0-1 0V12A1.5 1.5 0 0 0 7 13.5h7z"/>
+                </svg>
+            </a>
           </div>
-          <a class="btn btn-default navbar-btn" href="http://localhost:8080/PI_GaleriaRua/logout">Logout</a>
       </nav>
       <!-- Barra de navegação -->
     </head>
@@ -34,7 +36,7 @@
                 <!-- -->
                 <div class="card border-white">
                     <div class="container">
-                        <div class="card border-dark mb-3" style="max-width: 18rem;">
+                        <div class="card shadow-lg p-0 mb-5 bg-white rounded" style="max-width: 18rem;">
                             <div class="card-body">
                                 <c:if test="${not empty mensagem}">
                                     <h3>

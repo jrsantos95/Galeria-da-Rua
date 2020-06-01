@@ -29,7 +29,13 @@
                 <a class="nav-item nav-link" href="#">Disabled</a>
               </div>
               <div class="navbar-nav ml-auto">
-                  <a class="btn btn-default navbar-btn" href="http://localhost:8080/PI_GaleriaRua/pg_login">Entrar</a>
+                  <a class="btn btn-default navbar-btn" href="http://localhost:8080/PI_GaleriaRua/pg_login">Entrar
+                  <svg class="bi bi-box-arrow-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M11.646 11.354a.5.5 0 0 1 0-.708L14.293 8l-2.647-2.646a.5.5 0 0 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z"/>
+                    <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+                    <path fill-rule="evenodd" d="M2 13.5A1.5 1.5 0 0 1 .5 12V4A1.5 1.5 0 0 1 2 2.5h7A1.5 1.5 0 0 1 10.5 4v1.5a.5.5 0 0 1-1 0V4a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-1.5a.5.5 0 0 1 1 0V12A1.5 1.5 0 0 1 9 13.5H2z"/>
+                  </svg>
+                  </a>
               </div>
             </div>
         </div>
@@ -43,7 +49,12 @@
     <div class="container">
         <div class="row my-5 mb-5">    
             <div class="col-1">
-                <a class="btn btn-dark" href="http://localhost:8080/PI_GaleriaRua/pg_index">Dark</a>
+                <a class="btn btn-dark" href="http://localhost:8080/PI_GaleriaRua/pg_index">
+                    <svg class="bi bi-arrow-90deg-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M6.104 2.396a.5.5 0 0 1 0 .708L3.457 5.75l2.647 2.646a.5.5 0 1 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z"/>
+                        <path fill-rule="evenodd" d="M2.75 5.75a.5.5 0 0 1 .5-.5h6.5a2.5 2.5 0 0 1 2.5 2.5v5.5a.5.5 0 0 1-1 0v-5.5a1.5 1.5 0 0 0-1.5-1.5h-6.5a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </a>
             </div>
             <div class="col-10">
                 <div class="mx-auto col-lg-12 col-15">
@@ -53,6 +64,9 @@
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#pessoa" role="tab" 
                            aria-controls="pessoa" aria-selected="true">Pessoa</a>
                       </li>
+                      <svg class="bi bi-chevron-bar-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.146 3.646a.5.5 0 0 0 0 .708L7.793 8l-3.647 3.646a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708 0zM11.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5z"/>
+                      </svg>
                       <li class="nav-item" role="presentation">
                         <a class="nav-link" id="localidade-tab" data-toggle="tab" href="#localidade" role="tab" 
                            aria-controls="localidade" aria-selected="false">Localidade</a>
@@ -62,59 +76,59 @@
                     
                     <!-- Formulario/Dados de cadastro -->
                     <form role="form" action="CadastraApreciador" method="POST">
-                    <div class="tab-content" id="myTabContent">
-                        
-                        <div class="tab-pane fade show active" id="pessoa" role="tabpanel" aria-labelledby="home-tab">
-                            <h1>Cadastrar-se</h1>
-                            <p class="mb-3">Dados relativos a pessoa</p>
-                            
-                                <div class="was-validated">                            
-                                  <div class="form-group col-md-13 mb-2">
-                                      <label for="validationTooltip01">Nome</label>
-                                      <input type="text" class="form-control" name="nome" placeholder="Exemplo Nome" required>
-                                  </div> 
-                                </div>
+                        <div class="tab-content" id="myTabContent">
 
-                                <div class="was-validated mb-2">
-                                    <label for="exampleFormControlInput1">Email address</label>
-                                    <input type="email" class="form-control" name="email" placeholder="name@example.com" required>
-                                </div>
-                                
-                                <div class="was-validated input-grup date">                            
-                                  <div class="col-md-13 mb-2">
-                                      <label for="validationTooltip01">Data de Nascimento</label>
-                                      <input type="data" class="form-control" name="idade" placeholder="00/00/0000" required>
-                                  </div> 
-                                </div> 
+                            <div class="tab-pane fade show active" id="pessoa" role="tabpanel" aria-labelledby="home-tab">
+                                <h1>Cadastrar-se</h1>
+                                <p class="mb-3">Dados relativos a pessoa</p>
 
-                                <div class="was-validated">
-                                  <div class="col-md-13"> 
-                                      <label for="form19">Senha</label> 
-                                      <input type="password" class="form-control" name="senha" placeholder="••••••••" required> 
-                                  </div>
-                                  <div class="form-group col-md-13"> 
-                                      <label for="form20">Confirmar Senha</label> 
-                                      <input type="password" class="form-control" name="confirmaSenha" placeholder="••••••••" required> 
-                                  </div>
+                                    <div class="was-validated">                            
+                                      <div class="form-group col-md-13 mb-2">
+                                          <label for="validationTooltip01">Nome</label>
+                                          <input type="text" class="form-control" name="nome" placeholder="Exemplo Nome" required>
+                                      </div> 
+                                    </div>
+
+                                    <div class="was-validated mb-2">
+                                        <label for="exampleFormControlInput1">Email address</label>
+                                        <input type="email" class="form-control" name="email" placeholder="name@example.com" required>
+                                    </div>
+
+                                    <div class="was-validated input-grup date">                            
+                                      <div class="col-md-13 mb-2">
+                                          <label for="validationTooltip01">Data de Nascimento</label>
+                                          <input type="data" class="form-control" name="idade" placeholder="00/00/0000" required>
+                                      </div> 
+                                    </div> 
+
+                                    <div class="was-validated">
+                                      <div class="col-md-13"> 
+                                          <label for="form19">Senha</label> 
+                                          <input type="password" class="form-control" name="senha" placeholder="••••••••" required> 
+                                      </div>
+                                      <div class="form-group col-md-13"> 
+                                          <label for="form20">Confirmar Senha</label> 
+                                          <input type="password" class="form-control" name="confirmaSenha" placeholder="••••••••" required> 
+                                      </div>
+                                    </div>
+                            </div>
+
+                            <div class="tab-pane fade show" id="localidade" role="tabpanel" aria-labelledby="home-tab">
+                                <h1>Cadastrar-se</h1>
+                                <p class="mb-3">Dados relativos a localidade</p>
+                                <div class="form-group"> 
+                                    <label for="form18">Pais</label> 
+                                    <input type="text" class="form-control" name="pais"> 
                                 </div>
-                        </div>
-                  
-                        <div class="tab-pane fade show" id="localidade" role="tabpanel" aria-labelledby="home-tab">
-                            <h1>Cadastrar-se</h1>
-                            <p class="mb-3">Dados relativos a localidade</p>
-                            <div class="form-group"> 
-                                <label for="form18">Pais</label> 
-                                <input type="text" class="form-control" name="pais"> 
+                                <div class="form-group"> 
+                                    <label for="form18">Cidade</label> 
+                                    <input type="text" class="form-control" name="cidade"> 
+                                </div>
+                                <button type="submit" class="btn btn-dark">Cadastrar</button>
                             </div>
-                            <div class="form-group"> 
-                                <label for="form18">Cidade</label> 
-                                <input type="text" class="form-control" name="cidade"> 
-                            </div>
-                        </div>
-                    </div>    
-                        <button type="submit" class="btn btn-dark">Cadastrar</button>
-                        </form>
-                        <!-- Formulario/Dados de cadastro -->
+                        </div>    
+                    </form>
+                    <!-- Formulario/Dados de cadastro -->
                 </div>
             </div>
         </div>
@@ -187,7 +201,28 @@
             </div>
         </div>
     </div>
-    <!-- Footer -->
+    <!-- Footer -->]
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS    -->

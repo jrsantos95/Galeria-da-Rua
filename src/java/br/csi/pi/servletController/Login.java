@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.csi.pi.servletController;
 
 import br.csi.pi.dao.LoginDAO;
@@ -47,22 +42,23 @@ public class Login extends HttpServlet {
             HttpSession sessao = req.getSession();
             sessao.setAttribute("usuarioLogado", new UsuarioDAO().read(login, senha));
             
-            disp = req.getRequestDispatcher("index.html");
-            disp.forward(req, resp); 
+            resp.sendRedirect("http://localhost:8080/PI_GaleriaRua/pg_apreciador");
         }else if(autenticado.equals(artista)){
                  HttpSession sessao = req.getSession();
                  sessao.setAttribute("usuarioLogado", new UsuarioDAO().read(login, senha));
                  
-                 disp = req.getRequestDispatcher("index.html");
-                 disp.forward(req, resp); 
+                 resp.sendRedirect("http://localhost:8080/PI_GaleriaRua/pg_artistaFoto");
               }else if(autenticado.equals(gerente)){
                         HttpSession sessao = req.getSession();
                         sessao.setAttribute("usuarioLogado", new UsuarioDAO().read(login, senha));
                         
                         resp.sendRedirect("http://localhost:8080/PI_GaleriaRua/ListaUsuario");
                     }else{
-                          disp = req.getRequestDispatcher("index.html");
-                          disp.forward(req, resp); 
+                          req.setAttribute("nome", "Erro Login");
+                          req.setAttribute("mensagem", "Erro ao logar, cadastro não encontrado, tente novamente!");
+                          
+                          disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
+                          disp.forward(req,resp);
                          }
     }
 }

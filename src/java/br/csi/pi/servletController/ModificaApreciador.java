@@ -1,9 +1,7 @@
-
 package br.csi.pi.servletController;
 
 import br.csi.pi.dao.ApreciadorDAO;
 import br.csi.pi.modelo.Apreciador;
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -31,9 +29,6 @@ public class ModificaApreciador extends HttpServlet {
                           throws ServletException, IOException {
         System.out.println("Método post requisitado ....");
         
-        PrintWriter resposta = resp.getWriter();
-        
-        //PEGAR ATRIBULO COD DO CLIENTE PARA DAR UPDATE
         int cod_usuario = Integer.parseInt(req.getParameter("cod_usuario"));
         String nome = req.getParameter("nome");
         String senha = req.getParameter("senha");

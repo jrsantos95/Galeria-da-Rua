@@ -1,7 +1,3 @@
-/**
- *
- * @author Juan
- */
 package br.csi.pi.servletPaginas;
 
 import java.io.IOException;

@@ -38,24 +38,24 @@ public class CadastraApreciador extends HttpServlet {
         String idade = req.getParameter("idade");
         String pais = req.getParameter("pais");
         String cidade = req.getParameter("cidade");
-  
+        
         Apreciador ap = new Apreciador(nome, senha, email, idade, "ap");
         
         int retorno = new ApreciadorDAO().create(ap);
         if(retorno >= 1){
-            System.out.println("Cadastrou!");
-            req.setAttribute("mensagem","Sucesso no cadastro");
-            RequestDispatcher disp = req.getRequestDispatcher("index.html");
+            req.setAttribute("nome", "Cadastrou!");
+            req.setAttribute("mensagem", "Cadastro de Apreciador efetuado com sucesso!");
+            RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
             disp.forward(req,resp);
-        }else if(retorno == -1){//FAZER PAGINA DE ERRO!!!!!   
-                System.out.println("Já existe cadastro com esse user, Tente Novamente!");
-                req.setAttribute("mensagem","Já existe cadastro com esse user, Tente Novamente!");
-                RequestDispatcher disp = req.getRequestDispatcher("index.html");
+        }else if(retorno == -1){
+                req.setAttribute("nome", "Erro!");
+                req.setAttribute("mensagem", "Já existe cadastro com esse e-mail, por favor tente outro!");
+                RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
                 disp.forward(req,resp);
               }else {//FAZER PAGINA DE ERRO!!!!!  
-                    System.out.println("Falha no cadastro, Tente Novamente!");
-                    req.setAttribute("mensagem","Falha no cadastro, Tente Novamente!");
-                    RequestDispatcher disp = req.getRequestDispatcher("index.html");
+                    req.setAttribute("nome", "Erro!");
+                    req.setAttribute("mensagem", "Ocorreu algum erro, por favor tente novamente!");
+                    RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
                     disp.forward(req,resp);
               }
     }

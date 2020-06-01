@@ -36,7 +36,7 @@ public class ModificaUsuario extends HttpServlet {
            req.setAttribute("idade",u.getIdade());
            req.setAttribute("senha",u.getSenha());
 
-           RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/ModificaApreciador.jsp");
+           RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaModificaApreciador.jsp");
            disp.forward(req, resp);
         }else if("art".equals(u.getTipo())){
                 ArtistaFotografo af = new ArtistaDAO().read(cod_usuario);
@@ -50,7 +50,7 @@ public class ModificaUsuario extends HttpServlet {
                 req.setAttribute("linguagem", af.getLinguagem());
                 req.setAttribute("desc_artist_foto", af.getDescricao_artist_foto());
                 
-                RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/ModificaArtista.jsp");
+                RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaModificaArtista.jsp");
                 disp.forward(req, resp);
               }else{
                     RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaGerente.jsp");

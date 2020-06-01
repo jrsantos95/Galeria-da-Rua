@@ -41,9 +41,8 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp)
                    }
     
     if(retorno){
-        System.out.println("Teste delete");
         req.setAttribute("nome", "Excluiu!");
-        req.setAttribute("mensagem", "Usuario excluido com sucesso!");
+        req.setAttribute("mensagem", "Usuario excluido!");
         RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoG.jsp");
         disp.forward(req,resp);
     }else{            

@@ -3,7 +3,6 @@ package br.csi.pi.servletController;
 import br.csi.pi.dao.ArtistaDAO;
 import br.csi.pi.modelo.ArtistaFotografo;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,8 +27,6 @@ public class ModificaArtista extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
                           throws ServletException, IOException {
         System.out.println("Método post requisitado ....");
-        
-        PrintWriter resposta = resp.getWriter();
         
         int cod_usuario = Integer.parseInt(req.getParameter("cod_usuario"));
         String nome = req.getParameter("nome");

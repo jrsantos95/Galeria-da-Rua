@@ -8,7 +8,6 @@ package br.csi.pi.servletController;
 import br.csi.pi.dao.ArtistaDAO;
 import br.csi.pi.modelo.ArtistaFotografo;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,8 +33,6 @@ public class CadastraArtistaFotografo extends HttpServlet {
                           throws ServletException, IOException {
         System.out.println("Método post requisitado ....");
         
-        PrintWriter resposta = resp.getWriter();
-        
         String nome = req.getParameter("nome");
         String senha = req.getParameter("senha");
         String confirmaSenha = req.getParameter("confirmaSenha");
@@ -48,9 +45,6 @@ public class CadastraArtistaFotografo extends HttpServlet {
         String contato = req.getParameter("contato");
         String descricao_artist_foto = req.getParameter("descricao_artist_foto");
        
-        System.out.println("teste: "+confirmaSenha);
-        System.out.println("teste2: "+pais);
-        System.out.println("teste3: "+cidade);
         ArtistaFotografo af = new ArtistaFotografo(tag, 
                                                    contato, 
                                                    linguagem, 
@@ -61,21 +55,22 @@ public class CadastraArtistaFotografo extends HttpServlet {
                                                    descricao_artist_foto, 
                                                    "art");
         
-        System.out.println("Vaiii");
         int retorno = new ArtistaDAO().create(af);
+        
         if(retorno >= 1){
-            System.out.println("Cadastrou!");
-            req.setAttribute("mensagem","Sucesso no cadastro");
-            RequestDispatcher disp = req.getRequestDispatcher("index.html");
+            req.setAttribute("nome", "Cadastrou!");
+            req.setAttribute("mensagem", "Cadastro de Apreciador efetuado com sucesso!");
+            RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
             disp.forward(req,resp);
-        }else if(retorno == -1){//FAZER PAGINA DE ERRO!!!!!      
-                req.setAttribute("mensagem","Já existe cadastro com esse user, Tente Novamente!");
-                RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoC.jsp");
+        }else if(retorno == -1){
+                req.setAttribute("nome", "Erro!");
+                req.setAttribute("mensagem", "Já existe cadastro com esse e-mail, por favor tente outro!");
+                RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
                 disp.forward(req,resp);
-              }else {//FAZER PAGINA DE ERRO!!!!!  
-                    System.out.println("Falha no cadastro, Tente Novamente!");
-                    req.setAttribute("mensagem","Falha no cadastro, Tente Novamente!");
-                    RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoC.jsp");
+              }else {
+                    req.setAttribute("nome", "Erro!");
+                    req.setAttribute("mensagem", "Ocorreu algum erro, por favor tente novamente!");
+                    RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
                     disp.forward(req,resp);
               }
     }
