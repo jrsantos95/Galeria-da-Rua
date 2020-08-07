@@ -37,6 +37,8 @@ public class UsuarioDAO {
                                         rs.getString("senha"), 
                                         rs.getString("email"), 
                                         rs.getString("idade"),
+                                        rs.getString("pais"),
+                                        rs.getString("cidade"),
                                         rs.getString("tipo"));
                 return 0;
             }
@@ -58,6 +60,8 @@ public class UsuarioDAO {
                                         rs.getString("senha"), 
                                         rs.getString("email"), 
                                         rs.getString("idade"),
+                                        rs.getString("pais"),
+                                        rs.getString("cidade"),
                                         rs.getString("tipo"));
                 return u;
             }
@@ -80,6 +84,8 @@ public class UsuarioDAO {
                                         rs.getString("senha"), 
                                         rs.getString("email"), 
                                         rs.getString("idade"),
+                                        rs.getString("pais"),
+                                        rs.getString("cidade"),
                                         rs.getString("tipo"));
                 return u;
             }
@@ -89,24 +95,26 @@ public class UsuarioDAO {
         return null;
     }
     
-    public int create(String nome, String senha, String email, String idade, String tipo){
+    public int create(String nome, String senha, String email, String idade, String pais, String cidade, String tipo){
         int u = new UsuarioDAO().read(email);
         
         if(u == 1){
             try (Connection conn = new ConectaPostgres().getConexao()) {
-                String sql = "INSERT INTO usuario(nome, senha, email, idade, tipo) VALUES(?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO usuario(nome, senha, email, idade,pais,cidade, tipo) "
+                             +"VALUES(?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement pre = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 pre.setString(1, nome);
                 pre.setString(2, senha);
                 pre.setString(3, email);
                 pre.setString(4, idade);
-                pre.setString(5, tipo);
+                pre.setString(5, pais);
+                pre.setString(6, cidade);
+                pre.setString(7, tipo);
                 pre.executeUpdate();
                 ResultSet rs = pre.getGeneratedKeys();
                 rs.next();            
 
                 if(rs.getInt(1) > 0){
-                   System.out.println("AQUI:"+rs.getInt(1));
                    return rs.getInt(1);
                 }
             } catch (SQLException e) {
@@ -120,12 +128,16 @@ public class UsuarioDAO {
     
     public boolean create(Usuario u) {
         try (Connection conn = new ConectaPostgres().getConexao()){
-            String sql = "INSERT INTO usuario(nome, email, senha, idade, tipo) VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO usuario(nome, email, senha, idade, pais, cidade, tipo) "
+                         +"VALUES(?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, u.getNome());
             pre.setString(2, u.getEmail());
             pre.setString(3, u.getSenha());
             pre.setString(4, u.getIdade());
+            pre.setString(5, u.getPais());
+            pre.setString(6, u.getCidade());
+            pre.setString(7, u.getTipo());
             pre.setString(5, u.getTipo());
             if (pre.executeUpdate() > 0) {
                 return true;
@@ -136,17 +148,19 @@ public class UsuarioDAO {
         return false;
     }
     
-    public boolean update(int cod_usuario, String nome, String senha, String email, String idade, String tipo) {
+    public boolean update(int cod_usuario, String nome, String senha, String email, String idade, String pais, String cidade, String tipo) {
         try (Connection conn = new ConectaPostgres().getConexao()) {
-            String sql = "UPDATE usuario SET nome = ?, senha = ?, email = ?, idade = ?, tipo = ?"
-                          +"WHERE cod_usuario = ?";
+            String sql = "UPDATE usuario SET nome = ?, senha = ?, email = ?, idade = ?, pais = ?, cidade = ?"
+                         +", tipo = ? WHERE cod_usuario = ?";
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, nome);
             pre.setString(2, senha);
             pre.setString(3, email);
             pre.setString(4, idade);
-            pre.setString(5, tipo);
-            pre.setInt(6, cod_usuario);
+            pre.setString(5, pais);
+            pre.setString(6, cidade);
+            pre.setString(7, tipo);
+            pre.setInt(8, cod_usuario);
             if (pre.executeUpdate() > 0) {
                 return true;
             }
@@ -171,10 +185,8 @@ public class UsuarioDAO {
             }
         return false;
     }
-        
-    
 
-    public ArrayList<Usuario> getUsuarios() {
+    public ArrayList<Usuario> getUsuariosGerente() {
         ArrayList<Usuario> usuarios = new ArrayList<>();
         try (Connection conn = new ConectaPostgres().getConexao()) {
             Statement stmt = conn.createStatement();
@@ -185,7 +197,34 @@ public class UsuarioDAO {
                                              rs.getString("nome"), 
                                              rs.getString("senha"), 
                                              rs.getString("email"), 
-                                             rs.getString("idade"), 
+                                             rs.getString("idade"),
+                                             rs.getString("pais"),
+                                             rs.getString("cidade"),
+                                             rs.getString("tipo"));
+                    usuarios.add(us);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return usuarios;
+    }
+    
+        public ArrayList<Usuario> getUsuarioArtista(String nome) {
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+        try (Connection conn = new ConectaPostgres().getConexao()) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+            while (rs.next()) {
+                System.out.println("Nome: "+nome);
+                if(nome.equals(rs.getString("nome"))){
+                    Usuario us = new Usuario(rs.getInt("cod_usuario"), 
+                                             rs.getString("nome"), 
+                                             rs.getString("senha"), 
+                                             rs.getString("email"), 
+                                             rs.getString("idade"),
+                                             rs.getString("pais"),
+                                             rs.getString("cidade"),
                                              rs.getString("tipo"));
                     usuarios.add(us);
                 }

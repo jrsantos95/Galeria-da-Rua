@@ -34,17 +34,21 @@ public class ModificaApreciador extends HttpServlet {
         String senha = req.getParameter("senha");
         String email = req.getParameter("email");
         String idade = req.getParameter("idade");
+        String pais = req.getParameter("pais");
+        String cidade = req.getParameter("cidade");
         
-        Apreciador a = new Apreciador(cod_usuario , nome, senha, email, idade, "ap");
+        Apreciador a = new Apreciador(cod_usuario , nome, senha, email, idade, pais, cidade, "ap");
         boolean retorno = new ApreciadorDAO().update(a);
 
         if(retorno){
            req.setAttribute("mensagem","Modificado com sucesso");
-           RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoG.jsp");
+           req.setAttribute("usuarioModificado","usuarioModificado");
+           RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
            disp.forward(req,resp);
         }else{
               req.setAttribute("mensagem","Não é possivel modificado!");
-              RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoG.jsp");
+              req.setAttribute("usuarioModificado","usuarioModificado");
+              RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
               disp.forward(req,resp);
             
              }

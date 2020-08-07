@@ -17,7 +17,7 @@ public class PgGerente extends HttpServlet {
 
     protected void processRequest(HttpServletRequest req, HttpServletResponse resp) 
                                   throws ServletException, IOException{
-        RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaGerente.jsp");
+        RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginasGerente/PaginaGerente.jsp");
         disp.forward(req, resp);
     }
     

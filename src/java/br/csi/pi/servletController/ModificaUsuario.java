@@ -35,8 +35,10 @@ public class ModificaUsuario extends HttpServlet {
            req.setAttribute("email",u.getEmail());
            req.setAttribute("idade",u.getIdade());
            req.setAttribute("senha",u.getSenha());
-
-           RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaModificaApreciador.jsp");
+           req.setAttribute("pais", u.getPais());
+           req.setAttribute("cidade", u.getCidade());
+           
+           RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginasGerente/PaginaModificaApreciador.jsp");
            disp.forward(req, resp);
         }else if("art".equals(u.getTipo())){
                 ArtistaFotografo af = new ArtistaDAO().read(cod_usuario);
@@ -48,12 +50,15 @@ public class ModificaUsuario extends HttpServlet {
                 req.setAttribute("tag", af.getTag());
                 req.setAttribute("contato", af.getContato());
                 req.setAttribute("linguagem", af.getLinguagem());
+                req.setAttribute("pais", af.getPais());
+                req.setAttribute("cidade", af.getCidade());
                 req.setAttribute("desc_artist_foto", af.getDescricao_artist_foto());
+                req.setAttribute("imagem", af.getImagem());
                 
-                RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaModificaArtista.jsp");
+                RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginasGerente/PaginaModificaArtista.jsp");
                 disp.forward(req, resp);
               }else{
-                    RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaGerente.jsp");
+                    RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginasGerente/PaginaGerente.jsp");
                     disp.forward(req, resp);
                    }
     }

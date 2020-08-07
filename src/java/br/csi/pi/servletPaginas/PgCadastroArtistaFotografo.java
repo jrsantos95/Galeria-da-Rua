@@ -1,5 +1,6 @@
 package br.csi.pi.servletPaginas;
 
+
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ public class PgCadastroArtistaFotografo extends HttpServlet {
     
     protected void processRequest(HttpServletRequest req, HttpServletResponse resp) 
                                   throws ServletException, IOException{
-        RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaCadastroArtista.html");
+        RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginasComuns/PaginaCadastroArtista.html");
         disp.forward(req, resp);
     }
     

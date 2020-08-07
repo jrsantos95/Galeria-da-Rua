@@ -8,7 +8,7 @@ public class Obra {
     private int cod_obra;
     private int cod_artist_foto;
     private String nome;
-    private String imagem; //arrumar tipo de dato da foto
+    private String imagem;
     private String cor_predominante;
     private String descricao_obra;
     private String linguagem; 
@@ -30,6 +30,34 @@ public class Obra {
         this.setImagem(imagem);
     }
     
+    public Obra(
+                int cod_artist_foto, 
+                String nome, 
+                String cor_predominante, 
+                String descricao_obra, 
+                String linguagem,
+                String imagem) {
+        this.setCod_artist_foto(cod_artist_foto);
+        this.setCor_predominante(cor_predominante);
+        this.setDescricao_obra(descricao_obra);
+        this.setLinguagem(linguagem);
+        this.setNome(nome);
+        this.setImagem(imagem);
+    }
+    
+    public Obra(
+                int cod_artist_foto, 
+                String nome, 
+                String cor_predominante, 
+                String descricao_obra, 
+                String linguagem) {
+        this.setCod_artist_foto(cod_artist_foto);
+        this.setCor_predominante(cor_predominante);
+        this.setDescricao_obra(descricao_obra);
+        this.setLinguagem(linguagem);
+        this.setNome(nome);
+    }
+       
     //-------------------------------||----------------------------------------
     public int getCod_artist_foto() {
         return this.cod_artist_foto;
@@ -40,14 +68,14 @@ public class Obra {
     } 
     
     //-------------------------------||----------------------------------------
+
     public String getImagem() {
-        return this.imagem;
+        return imagem;
     }
 
     private void setImagem(String imagem) {
         this.imagem = imagem;
     }
-    
     
     //-------------------------------||----------------------------------------
     public int getCod_obra() {

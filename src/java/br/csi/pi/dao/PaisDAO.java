@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -78,5 +79,21 @@ public class PaisDAO {
                 e.printStackTrace();
         }
         return false;
+    }
+    
+    public ArrayList<Pais> getPais() {
+    ArrayList<Pais> paises = new ArrayList<>();
+        try (Connection conn = new ConectaPostgres().getConexao()) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM pais");
+            while (rs.next()) {
+                Pais p = new Pais(rs.getInt("cod_pais"), 
+                                  rs.getString("nome_pais"));
+                paises.add(p);               
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return paises;
     }
 }

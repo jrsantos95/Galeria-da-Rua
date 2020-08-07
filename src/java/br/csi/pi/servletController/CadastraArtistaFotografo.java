@@ -36,7 +36,7 @@ public class CadastraArtistaFotografo extends HttpServlet {
         String nome = req.getParameter("nome");
         String senha = req.getParameter("senha");
         String confirmaSenha = req.getParameter("confirmaSenha");
-        String tag = req.getParameter("tag");
+        String tag = "@".concat(req.getParameter("tag"));
         String email = req.getParameter("email");
         String idade = req.getParameter("idade");
         String pais = req.getParameter("pais");
@@ -45,33 +45,44 @@ public class CadastraArtistaFotografo extends HttpServlet {
         String contato = req.getParameter("contato");
         String descricao_artist_foto = req.getParameter("descricao_artist_foto");
        
-        ArtistaFotografo af = new ArtistaFotografo(tag, 
-                                                   contato, 
-                                                   linguagem, 
-                                                   nome, 
-                                                   senha, 
-                                                   email, 
-                                                   idade, 
-                                                   descricao_artist_foto, 
-                                                   "art");
-        
-        int retorno = new ArtistaDAO().create(af);
-        
-        if(retorno >= 1){
-            req.setAttribute("nome", "Cadastrou!");
-            req.setAttribute("mensagem", "Cadastro de Apreciador efetuado com sucesso!");
-            RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
+        if(!confirmaSenha.equals(senha)){
+            req.setAttribute("nome", "ERRO");
+            req.setAttribute("tipoArt","art");
+            req.setAttribute("mensagem", "Senha e confirmarSenha não são iguais!, tente novamente");
+            RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
             disp.forward(req,resp);
-        }else if(retorno == -1){
-                req.setAttribute("nome", "Erro!");
-                req.setAttribute("mensagem", "Já existe cadastro com esse e-mail, por favor tente outro!");
-                RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
-                disp.forward(req,resp);
-              }else {
-                    req.setAttribute("nome", "Erro!");
-                    req.setAttribute("mensagem", "Ocorreu algum erro, por favor tente novamente!");
-                    RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
+        }else{
+                ArtistaFotografo af = new ArtistaFotografo(tag, 
+                                                           contato, 
+                                                           linguagem, 
+                                                           nome, 
+                                                           senha, 
+                                                           email, 
+                                                           idade,
+                                                           pais,
+                                                           cidade,
+                                                           descricao_artist_foto, 
+                                                           "art",
+                                                           "semImagem");
+
+                int retorno = new ArtistaDAO().create(af);
+
+                if(retorno >= 1){
+                    RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaCadastroArtistaImagem.html");
                     disp.forward(req,resp);
-              }
+                }else if(retorno == -1){
+                        req.setAttribute("nome", "Erro!");
+                        req.setAttribute("tipoArt","art");
+                        req.setAttribute("mensagem", "Já existe cadastro com esse e-mail, por favor tente outro!");
+                        RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
+                        disp.forward(req,resp);
+                      }else {
+                            req.setAttribute("nome", "Erro!");
+                            req.setAttribute("tipoArt","art");
+                            req.setAttribute("mensagem", "Ocorreu algum erro, por favor tente novamente!");
+                            RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
+                            disp.forward(req,resp);
+                      }
+            }
     }
 }

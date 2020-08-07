@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class ApreciadorDAO {
     public int create(Apreciador a) {
-        int cod_usuario = new UsuarioDAO().create(a.getNome(),a.getSenha(),a.getEmail(),a.getIdade(),a.getTipo());                        
+        int cod_usuario = new UsuarioDAO().create(a.getNome(),a.getSenha(),a.getEmail(),a.getIdade(),a.getPais(),a.getCidade(),a.getTipo());                        
        
         if(cod_usuario == 0){
             return 0;
@@ -48,6 +48,8 @@ public class ApreciadorDAO {
                                               u.getSenha(),        
                                               u.getEmail(),        
                                               u.getIdade(),
+                                              u.getPais(),
+                                              u.getCidade(),
                                               u.getTipo());
                 return a;
             }
@@ -63,6 +65,8 @@ public class ApreciadorDAO {
                                                   a.getSenha(),
                                                   a.getEmail(),
                                                   a.getIdade(),
+                                                  a.getPais(),
+                                                  a.getCidade(),
                                                   a.getTipo());
         
         if(retorno){
@@ -88,7 +92,7 @@ public class ApreciadorDAO {
                     }else{
                            System.out.println("Falha ao deletar apreciador");
                            return false;
-                         }
+                    }     
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

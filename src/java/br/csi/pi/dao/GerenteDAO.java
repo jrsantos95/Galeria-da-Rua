@@ -24,7 +24,13 @@ public class GerenteDAO {
     }
     
     public boolean create(Gerente g) {
-        int cod_usuario = new UsuarioDAO().create(g.getNome(),g.getSenha(),g.getEmail(),g.getIdade(),g.getTipo());                        
+        int cod_usuario = new UsuarioDAO().create(g.getNome(),
+                                                  g.getSenha(),
+                                                  g.getEmail(),
+                                                  g.getIdade(), 
+                                                  g.getPais(), 
+                                                  g.getCidade(), 
+                                                  g.getTipo());                        
         if(cod_usuario < 1){
             return false;
         }
@@ -55,6 +61,8 @@ public class GerenteDAO {
                                         u.getSenha(),        
                                         u.getEmail(),        
                                         u.getIdade(),
+                                        u.getPais(),
+                                        u.getCidade(),
                                         u.getTipo());
                 return g;
             }
@@ -70,6 +78,8 @@ public class GerenteDAO {
                                                   g.getSenha(),
                                                   g.getEmail(),
                                                   g.getIdade(),
+                                                  g.getPais(),
+                                                  g.getCidade(),
                                                   g.getTipo());    
         if(retorno){
             System.out.println("Gerente atualizado com sucesso");

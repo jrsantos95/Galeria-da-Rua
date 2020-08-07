@@ -4,6 +4,7 @@ import br.csi.pi.dao.ApreciadorDAO;
 import br.csi.pi.dao.ArtistaDAO;
 import br.csi.pi.dao.GerenteDAO;
 import br.csi.pi.dao.UsuarioDAO;
+import br.csi.pi.modelo.ArtistaFotografo;
 import br.csi.pi.modelo.Gerente;
 import br.csi.pi.modelo.Usuario;
 import java.io.IOException;
@@ -33,7 +34,8 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp)
     if("ap".equals(u.getTipo())){
        retorno = new ApreciadorDAO().delete(u);
     }else if("art".equals(u.getTipo())){
-             retorno = new ArtistaDAO().delete(u);
+             ArtistaFotografo af = new ArtistaDAO().read(u.getCod_usuario());
+             retorno = new ArtistaDAO().delete(af);
          }else if("g".equals(u.getTipo())){
                   retorno = new GerenteDAO().delete((Gerente) u);
               }else{
@@ -43,11 +45,13 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp)
     if(retorno){
         req.setAttribute("nome", "Excluiu!");
         req.setAttribute("mensagem", "Usuario excluido!");
-        RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoG.jsp");
+        req.setAttribute("usuarioExcluido","usuarioExcluido");
+        RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
         disp.forward(req,resp);
     }else{            
-        req.setAttribute("mensagem","Cliente relacionado a venda, Não é possivel excluir!");
-        RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoG.jsp");
+        req.setAttribute("mensagem","Usuario relacionado a obra, Não é possivel excluir!");
+        req.setAttribute("usuarioExcluido","usuarioExcluido");
+        RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
         disp.forward(req,resp);
     }
 }

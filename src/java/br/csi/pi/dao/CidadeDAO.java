@@ -131,4 +131,21 @@ public class CidadeDAO {
         }
         return cidade_contem_pais;
     }
+       
+    public ArrayList<Cidade> getCidade() {
+    ArrayList<Cidade> cidades = new ArrayList<>();
+        try (Connection conn = new ConectaPostgres().getConexao()) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM cidade");
+            while (rs.next()) {
+                Cidade c = new Cidade(rs.getInt("cod_cidade"),
+                                    rs.getInt("cod_pais"), 
+                                  rs.getString("nome_cidade"));
+                cidades.add(c);               
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return cidades;
+    }
 }

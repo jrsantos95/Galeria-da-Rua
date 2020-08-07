@@ -1,11 +1,13 @@
 package br.csi.pi.dao;
 
 import br.csi.pi.modelo.ArtistaFotografo;
+import br.csi.pi.modelo.Obra;
 import br.csi.pi.modelo.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,23 +15,23 @@ import java.sql.SQLException;
  */
 public class ArtistaDAO {
     public int create(ArtistaFotografo af) {
-        int cod_usuario = new UsuarioDAO().create(af.getNome(),af.getSenha(),af.getEmail(),af.getIdade(),af.getTipo());                        
+        int cod_usuario = new UsuarioDAO().create(af.getNome(),af.getSenha(),af.getEmail(),af.getIdade(),af.getPais(), af.getCidade(),af.getTipo());                        
         
         if(cod_usuario == 0){
             return 0;
         }else if(cod_usuario == -1){
-                    System.out.println("testando -1");
                     return -1;
                   }else{
                         try(Connection conn = new ConectaPostgres().getConexao()){
-                            String sql = "INSERT INTO artista_fotografo(cod_usuario, tag, contato, linguagem, descricao_artist_foto)"
-                                          + "VALUES (?,?,?,?,?)";
+                            String sql = "INSERT INTO artista_fotografo(cod_usuario, tag, contato, linguagem, descricao_artist_foto, imagem)"
+                                          + "VALUES (?,?,?,?,?,?)";
                             PreparedStatement pre = conn.prepareStatement(sql);
                             pre.setInt(1, cod_usuario);
                             pre.setString(2, af.getTag());
                             pre.setString(3, af.getContato());
                             pre.setString(4, af.getLinguagem());
                             pre.setString(5, af.getDescricao_artist_foto());
+                            pre.setString(6, af.getImagem());
                             if (pre.executeUpdate() > 0){
                                 return 1;
                             };                        
@@ -43,7 +45,7 @@ public class ArtistaDAO {
     public ArtistaFotografo read(int cod_usuario) {
         Usuario u = new UsuarioDAO().read(cod_usuario);
         try (Connection conn = new ConectaPostgres().getConexao()) {
-            String sql = "SELECT * FROM artista_fotografo WHERE cod_usuario = ?";
+            String sql = "select * from artista_fotografo WHERE cod_usuario = ?";
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, cod_usuario);
             ResultSet rs = pre.executeQuery();
@@ -56,9 +58,12 @@ public class ArtistaDAO {
                                                            u.getNome(), 
                                                            u.getSenha(), 
                                                            u.getEmail(), 
-                                                           u.getIdade(), 
+                                                           u.getIdade(),
+                                                           u.getPais(),
+                                                           u.getCidade(),
                                                            rs.getString("descricao_artist_foto"),
-                                                           u.getTipo());
+                                                           u.getTipo(),
+                                                           rs.getString("imagem"));
                 return af;
             }
         } catch (SQLException e) {
@@ -73,6 +78,8 @@ public class ArtistaDAO {
                                                   af.getSenha(),
                                                   af.getEmail(),
                                                   af.getIdade(),
+                                                  af.getPais(),
+                                                  af.getCidade(),
                                                   af.getTipo());       
         if(retorno){
             try (Connection conn = new ConectaPostgres().getConexao()) {
@@ -100,8 +107,22 @@ public class ArtistaDAO {
              }
     }
     
-    public boolean delete(Usuario af) {
-        /*ArrayList<Obra> obras = new ObraDAO().getObras_contem_artista_foto(af.getCod_artistFoto());
+    public boolean updateImagem(String imagem) {
+        try (Connection conn = new ConectaPostgres().getConexao()) {
+            String sql = "UPDATE artista_fotografo SET imagem = ? WHERE imagem = 'semImagem'";
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, imagem);
+            if (pre.executeUpdate() > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean delete(ArtistaFotografo af) {
+        ArrayList<Obra> obras = new ObraDAO().getObras_contem_artista_foto(af.getCod_artistFoto());
         for(int i = 0; i < obras.size(); i++){
             Obra o = obras.get(i);
             boolean retorno = new ObraDAO().delete(o.getCod_obra());
@@ -110,7 +131,7 @@ public class ArtistaDAO {
             }else{
                     System.out.println("Erro ao excluir obras da tabela obra");
                  }
-        }*/
+        }
         System.out.println("Teste delete2");
         try (Connection conn = new ConectaPostgres().getConexao()) {
                 String sql = "DELETE FROM artista_fotografo WHERE cod_usuario = ?";

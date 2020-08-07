@@ -10,6 +10,7 @@ public class ArtistaFotografo extends Usuario{
     private String contato;
     private String linguagem;
     private String descricao_artist_foto;
+    private String imagem;
     
     //-------------------------------||----------------------------------------
     public ArtistaFotografo(int cod_usuario, 
@@ -21,14 +22,18 @@ public class ArtistaFotografo extends Usuario{
                             String senha, 
                             String email, 
                             String idade, 
+                            String pais,
+                            String cidade,
                             String descricao_artist_foto,
-                            String tipo) {
-        super(cod_usuario, nome, senha, email, idade, tipo);
+                            String tipo,
+                            String imagem) {
+        super(cod_usuario, nome, senha, email, idade,pais, cidade, tipo);
         this.setCod_artistFoto(cod_artistFoto);
         this.setContato(contato);
         this.setLinguagem(linguagem);
         this.setTag(tag);
         this.setDescricao_artist_foto(descricao_artist_foto);
+        this.setImagem(imagem);
     }
     
     public ArtistaFotografo(int cod_usuario, 
@@ -39,9 +44,11 @@ public class ArtistaFotografo extends Usuario{
                             String senha, 
                             String email, 
                             String idade, 
+                            String pais,
+                            String cidade,
                             String descricao_artist_foto,
                             String tipo) {
-        super(cod_usuario, nome, senha, email, idade, tipo);
+        super(cod_usuario, nome, senha, email, idade, pais, cidade, tipo);
         this.setContato(contato);
         this.setLinguagem(linguagem);
         this.setTag(tag);
@@ -56,17 +63,17 @@ public class ArtistaFotografo extends Usuario{
                             String senha, 
                             String email, 
                             String idade, 
+                            String pais,
+                            String cidade,
                             String descricao_artist_foto,
-                            String tipo) {
-        super(nome, senha, email, idade, tipo);
+                            String tipo,
+                            String imagem){    
+        super(nome, senha, email, idade, pais, cidade, tipo);
         this.setContato(contato);
         this.setLinguagem(linguagem);
         this.setTag(tag);
         this.setDescricao_artist_foto(descricao_artist_foto);
-    }
-
-    public ArtistaFotografo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.setImagem(imagem);
     }
     
     //-------------------------------||----------------------------------------
@@ -113,4 +120,14 @@ public class ArtistaFotografo extends Usuario{
     private void setDescricao_artist_foto(String descricao_artist_foto) {
         this.descricao_artist_foto = descricao_artist_foto;
     }
+    
+    //-------------------------------||----------------------------------------
+    public String getImagem() {
+        return imagem;
+    }
+
+    private void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+    
 }

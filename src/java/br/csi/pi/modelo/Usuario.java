@@ -10,34 +10,67 @@ public class Usuario{
     private String senha;
     private String email;
     private String idade;
+    private String pais;
+    private String cidade;
     private String tipo;//g = gerente , ap = apreciador, af = artista_fotografo;
     
     //-------------------------------||----------------------------------------
-    public Usuario(String nome, String senha, String email, String idade, String tipo){
+    public Usuario(String nome, String senha, String email, String idade,String pais, String cidade, String tipo){
         this.setTipo(tipo);
         this.setNome(nome);
         this.setSenha(senha);
         this.setEmail(email);
         this.setIdade(idade);
+        this.setPais(pais);
+        this.setCidade(cidade);
     }
     
-    public Usuario(int cod_usuario,String nome, String senha, String email, String idade, String tipo ){
+    public Usuario(int cod_usuario,
+                   String nome, 
+                   String senha, 
+                   String email, 
+                   String idade,
+                   String pais,
+                   String cidade, 
+                   String tipo ){
         this.setCod_usuario(cod_usuario);
         this.setTipo(tipo);
         this.setNome(nome);
         this.setSenha(senha);
         this.setEmail(email);
         this.setIdade(idade);
+        this.setPais(pais);
+        this.setCidade(cidade);
     }
     
-    public Usuario(String nome, String senha, String email){
+    public Usuario(String nome, String senha, String email,String pais, String cidade){
         this.setNome(nome);
         this.setSenha(senha);
         this.setEmail(email);
+        this.setPais(pais);
+        this.setCidade(cidade);
     }
     
     public Usuario(){   
     } 
+    
+    //-------------------------------||----------------------------------------
+    public String getPais() {
+        return pais;
+    }
+    
+    private void setPais(String pais) {
+        this.pais = pais;
+    }
+    
+    //-------------------------------||----------------------------------------
+    public String getCidade() {
+        return cidade;
+    }
+    
+    private void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
     
     //-------------------------------||----------------------------------------
     public String getIdade() {

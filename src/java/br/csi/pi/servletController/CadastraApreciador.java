@@ -39,24 +39,38 @@ public class CadastraApreciador extends HttpServlet {
         String pais = req.getParameter("pais");
         String cidade = req.getParameter("cidade");
         
-        Apreciador ap = new Apreciador(nome, senha, email, idade, "ap");
+        System.out.println("Pais: "+pais);
+        System.out.println("Cidade: "+cidade);
         
-        int retorno = new ApreciadorDAO().create(ap);
-        if(retorno >= 1){
-            req.setAttribute("nome", "Cadastrou!");
-            req.setAttribute("mensagem", "Cadastro de Apreciador efetuado com sucesso!");
-            RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
+        if(!confirmaSenha.equals(senha)){
+            req.setAttribute("nome", "ERRO!");
+            req.setAttribute("tipoAp","ap");
+            req.setAttribute("mensagem", "Senha e confirmarSenha não são iguais!, tente novamente");
+            RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
             disp.forward(req,resp);
-        }else if(retorno == -1){
-                req.setAttribute("nome", "Erro!");
-                req.setAttribute("mensagem", "Já existe cadastro com esse e-mail, por favor tente outro!");
-                RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
-                disp.forward(req,resp);
-              }else {//FAZER PAGINA DE ERRO!!!!!  
-                    req.setAttribute("nome", "Erro!");
-                    req.setAttribute("mensagem", "Ocorreu algum erro, por favor tente novamente!");
-                    RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
+        }else{
+                Apreciador ap = new Apreciador(nome, senha, email, idade, pais, cidade, "ap");
+
+                int retorno = new ApreciadorDAO().create(ap);
+                if(retorno >= 1){
+                    req.setAttribute("nome", "Cadastrou!");
+                    req.setAttribute("index","index");
+                    req.setAttribute("mensagem", "Cadastro de Apreciador efetuado com sucesso!");
+                    RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
                     disp.forward(req,resp);
-              }
+                }else if(retorno == -1){
+                        req.setAttribute("nome", "Erro!");
+                        req.setAttribute("tipoAp","ap");
+                        req.setAttribute("mensagem", "Já existe cadastro com esse e-mail, por favor tente outro!");
+                        RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
+                        disp.forward(req,resp);
+                      }else {//FAZER PAGINA DE ERRO!!!!!  
+                            req.setAttribute("nome", "Erro!");
+                            req.setAttribute("tipoAp","ap");
+                            req.setAttribute("mensagem", "Ocorreu algum erro, por favor tente novamente!");
+                            RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
+                            disp.forward(req,resp);
+                      }
+            }
     }
 }

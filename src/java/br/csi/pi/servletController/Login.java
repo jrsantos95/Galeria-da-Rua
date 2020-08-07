@@ -1,7 +1,9 @@
 package br.csi.pi.servletController;
 
+import br.csi.pi.dao.ArtistaDAO;
 import br.csi.pi.dao.LoginDAO;
 import br.csi.pi.dao.UsuarioDAO;
+import br.csi.pi.modelo.Usuario;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,7 +47,8 @@ public class Login extends HttpServlet {
             resp.sendRedirect("http://localhost:8080/PI_GaleriaRua/pg_apreciador");
         }else if(autenticado.equals(artista)){
                  HttpSession sessao = req.getSession();
-                 sessao.setAttribute("usuarioLogado", new UsuarioDAO().read(login, senha));
+                 Usuario u = new UsuarioDAO().read(login, senha);
+                 sessao.setAttribute("usuarioLogado", new ArtistaDAO().read(u.getCod_usuario()));
                  
                  resp.sendRedirect("http://localhost:8080/PI_GaleriaRua/pg_artistaFoto");
               }else if(autenticado.equals(gerente)){
@@ -55,9 +58,10 @@ public class Login extends HttpServlet {
                         resp.sendRedirect("http://localhost:8080/PI_GaleriaRua/ListaUsuario");
                     }else{
                           req.setAttribute("nome", "Erro Login");
+                          req.setAttribute("falhaLogin","falhaLogin");
                           req.setAttribute("mensagem", "Erro ao logar, cadastro não encontrado, tente novamente!");
                           
-                          disp = req.getRequestDispatcher("/WEB-INF/views/SucessoCadastro.jsp");
+                          disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
                           disp.forward(req,resp);
                          }
     }

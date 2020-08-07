@@ -87,4 +87,8 @@ public class CriaObraDAO {
               }
         return false;
     }
+
+    CriaObra create(Obra o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

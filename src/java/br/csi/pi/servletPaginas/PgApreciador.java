@@ -17,7 +17,7 @@ public class PgApreciador extends HttpServlet {
 
     protected void processRequest(HttpServletRequest req, HttpServletResponse resp) 
                                   throws ServletException, IOException{
-        RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaApreciador.jsp");
+        RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginasApreciador/PaginaApreciador.jsp");
         disp.forward(req, resp);
     }
     

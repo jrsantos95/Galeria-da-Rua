@@ -17,7 +17,7 @@ public class PgLogin extends HttpServlet {
 
     protected void processRequest(HttpServletRequest req, HttpServletResponse resp) 
                                   throws ServletException, IOException{
-        RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaLogin.html");
+        RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginasComuns/PaginaLogin.html");
         disp.forward(req, resp);
     }
     
