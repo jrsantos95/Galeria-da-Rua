@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public class ObraDAO {
     public boolean create(Obra o) throws FileNotFoundException, IOException {
         try (Connection conn = new ConectaPostgres().getConexao()){
-            String sql ="INSERT INTO obra(cod_artist_foto, nome, imagem, cor_predominante, descricao_obra, linguagem)"
-                          +"VALUES(?,?,?,?,?,?)";
+            String sql ="INSERT INTO obra(cod_artist_foto, nome, imagem, cor_predominante, descricao_obra, linguagem,autor,pais)"
+                          +"VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, o.getCod_artist_foto());
             pre.setString(2, o.getNome());
@@ -25,6 +25,8 @@ public class ObraDAO {
             pre.setString(4, o.getCor_predominante());
             pre.setString(5, o.getDescricao_obra());
             pre.setString(6, o.getLinguagem());
+            pre.setString(7, o.getAutor());
+            pre.setString(8, o.getPais());
             if (pre.executeUpdate() > 0) {
                 return true;
             }
@@ -47,7 +49,10 @@ public class ObraDAO {
                                   rs.getString("cor_predominante"),     
                                   rs.getString("descricao_obra"), 
                                   rs.getString("linguagem"), 
-                                  rs.getString("imagem")); 
+                                  rs.getString("imagem"),
+                                  rs.getString("autor"),
+                                  rs.getString("pais"));
+                                  
                 return o;
             }
         } catch (SQLException e) {
@@ -70,7 +75,9 @@ public class ObraDAO {
                                   rs.getString("cor_predominante"),     
                                   rs.getString("descricao_obra"), 
                                   rs.getString("linguagem"), 
-                                  rs.getString("imagem")); 
+                                  rs.getString("imagem"),
+                                  rs.getString("autor"),
+                                  rs.getString("pais"));
                 return o;
             }
         } catch (SQLException e) {
@@ -153,7 +160,9 @@ public class ObraDAO {
                                   rs.getString("cor_predominante"),     
                                   rs.getString("descricao_obra"), 
                                   rs.getString("linguagem"), 
-                                  rs.getString("imagem"));
+                                  rs.getString("imagem"),
+                                  rs.getString("autor"),
+                                  rs.getString("pais"));
                 obra_contem_artista_fotografo.add(o);
                 
             }
@@ -177,7 +186,9 @@ public class ObraDAO {
                                   rs.getString("cor_predominante"),     
                                   rs.getString("descricao_obra"), 
                                   rs.getString("linguagem"), 
-                                  rs.getString("imagem"));
+                                  rs.getString("imagem"),
+                                  rs.getString("autor"),
+                                  rs.getString("pais"));
                 obra_contem_artista_fotografo.add(o);
                 
             }
@@ -218,7 +229,9 @@ public class ObraDAO {
                                   rs.getString("cor_predominante"),     
                                   rs.getString("descricao_obra"), 
                                   rs.getString("linguagem"), 
-                                  rs.getString("imagem"));
+                                  rs.getString("imagem"),
+                                  rs.getString("autor"),
+                                  rs.getString("pais"));
                 obra_contem_artista_fotografo.add(o);
             }
         } catch (SQLException ex) {
@@ -241,12 +254,39 @@ public class ObraDAO {
                                   rs.getString("cor_predominante"),     
                                   rs.getString("descricao_obra"), 
                                   rs.getString("linguagem"), 
-                                  rs.getString("imagem"));
+                                  rs.getString("imagem"),
+                                  rs.getString("autor"),
+                                  rs.getString("pais"));
                 obra_contem_linguagem.add(o);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return obra_contem_linguagem;
+    }
+    
+    public ArrayList<Obra> getObras_pais(String pais) {
+        ArrayList<Obra> obra_contem_pais = new ArrayList<>();
+        try (Connection conn = new ConectaPostgres().getConexao()) {
+            String sql = "SELECT * FROM obra WHERE pais = ?";
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, pais);
+            ResultSet rs = pre.executeQuery();
+            while(rs.next()) {
+                Obra o = new Obra(rs.getInt("cod_obra"), 
+                                  rs.getInt("cod_artist_foto"), 
+                                  rs.getString("nome"),     
+                                  rs.getString("cor_predominante"),     
+                                  rs.getString("descricao_obra"), 
+                                  rs.getString("linguagem"), 
+                                  rs.getString("imagem"),
+                                  rs.getString("autor"),
+                                  rs.getString("pais"));
+                obra_contem_pais.add(o);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return obra_contem_pais;
     }
 }    

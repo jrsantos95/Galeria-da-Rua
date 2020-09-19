@@ -1,8 +1,9 @@
 <%-- 
-    Document   : PaginaCadastroObra
-    Created on : 22/07/2020, 14:14:58
+    Document   : PaginaSelecaoPais
+    Created on : 19/09/2020, 02:24:57
     Author     : Juan
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -19,49 +20,52 @@
     <!-- Barra de navegação -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
         <div class="container">
-            <a class="navbar-brand" href="http://localhost:8080/PI_GaleriaRua/pg_artistaFoto">
+            <a class="navbar-brand" href="http://localhost:8080/PI_GaleriaRua/pg_index">
                 <svg class="bi bi-layout-wtf" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M5 1H1v8h4V1zM1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm13 2H9v5h5V2zM9 1a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9zM5 13H3v2h2v-2zm-2-1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3zm12-1H9v2h6v-2zm-6-1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H9z"/>
                 </svg>
                 Galeria da Rua
             </a>
-            <div class="navbar-nav mr-auto">
-                  <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_artistaFoto">Perfil</a>
-                  <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_ModificaPerfilArtista?cod_usuario=${sessionScope['usuarioLogado'].cod_usuario}">Modificar Perfil</a>
-                  <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_cadastroObra">Cadastrar Obra</a>
-                  <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_MostraObras?cod_artisFoto=${sessionScope['usuarioLogado'].cod_artistFoto}">Obras Pessoais</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav ml-auto">
+                <a class="btn btn-default navbar-btn" href="http://localhost:8080/PI_GaleriaRua/pg_index">Voltar
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-skip-backward" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M.5 3.5A.5.5 0 0 1 1 4v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v2.94l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L8.5 8.752v2.94c0 .653-.713.998-1.233.696L1 8.752V12a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm7 1.133L1.696 8 7.5 11.367V4.633zm7.5 0L9.196 8 15 11.367V4.633z"/>
+                  </svg>
+                </a>
             </div>
         </div>
-        <!-- <a>${sessionScope['usuarioLogado'].nome}</a> -->
-        <a class="btn btn-default navbar-btn" href="http://localhost:8080/PI_GaleriaRua/logout">
-            Logout
-            <svg class="bi bi-box-arrow-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M4.354 11.354a.5.5 0 0 0 0-.708L1.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
-                <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0 0 1h9a.5.5 0 0 0 .5-.5z"/>
-                <path fill-rule="evenodd" d="M14 13.5a1.5 1.5 0 0 0 1.5-1.5V4A1.5 1.5 0 0 0 14 2.5H7A1.5 1.5 0 0 0 5.5 4v1.5a.5.5 0 0 0 1 0V4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5H7a.5.5 0 0 1-.5-.5v-1.5a.5.5 0 0 0-1 0V12A1.5 1.5 0 0 0 7 13.5h7z"/>
-            </svg>
-        </a>
     </nav>
     <!-- Barra de navegação -->
   </head>
   
   <body>
       
-    <div class="container">
-        <div class="row my-5 mb-5">
-            <c:forEach var="obras" items="${obras}">
-                <img src="${obras.getImagem()}" width="300" class="card-img-top" alt="Responsive image">
-                    <blockquote class="blockquote my-4 mb-4">
-                        <p class="mb-0">Nome da Obra: ${obras.getNome()}</p>
-                        <footer class="blockquote-footer">Linguagem: <cite title="Source Title">${obras.getLinguagem()}</cite></footer>
-                        <footer class="blockquote-footer">Cor Predominante: <cite title="Source Title">${obras.getCor_predominante()}</cite></footer>
-                        <footer class="blockquote-footer">Autor: <cite title="Source Title">${obras.getAutor()}</cite></footer>
-                        <footer class="blockquote-footer">Pais: <cite title="Source Title">${obras.getPais()}</cite></footer>
-                        <footer class="blockquote-footer">Descrição: <cite title="Source Title">${obras.getDescricao_obra()}</cite></footer>
-                    </blockquote>
-            </c:forEach>
+      
+      <form role="form" action="pg_ObraPais" method="POST">
+      <div class="container my-5 mb-5">
+          <h2>Selecione o pais que deseja visualizar as obras:</h2>
+        <div class="form-group">
+            <label for="exampleFormControlSelect2">Pais</label>
+            <select multiple class="form-control" name="pais">
+                  <c:forEach var="paises" items="${paises}">
+                      <option>${paises.nome}</option>
+                      <c:set var="teste" value="50"/>
+                  </c:forEach>
+            </select>
         </div>
+          <button type="submit" class="btn btn-dark">Pesquisar
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+              </svg>
+          </button>
     </div>
+    </form>
+      
+    
+    
     
     <!-- Footer -->
     <div class="container my-5 mb-5">

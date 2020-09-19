@@ -16,28 +16,25 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Juan
  */
-@WebServlet(name = "PgObraCategoria", urlPatterns = {"/pg_ObraCategoria"})
-public class PgObraCategoria extends HttpServlet {
+@WebServlet(name = "PgObraPais", urlPatterns = {"/pg_ObraPais"})
+public class PgObraPais extends HttpServlet {
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
                      throws ServletException, IOException {
-        
-    String categoria = req.getParameter("categoria");
-    
-    if(categoria.equals("VerTodas")){
-        ArrayList<Obra> o = new ObraDAO().getObrasTotal();
-        Collections.reverse(o);
-        
-        req.setAttribute("obras", o);
-        RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaObrasCategoria.jsp");
-        disp.forward(req,resp);
+        System.out.println("Chamou GET ....");
     }
     
-    ArrayList<Obra> o = new ObraDAO().getObras_linguagem(categoria);
-    Collections.reverse(o);
-    
-    req.setAttribute("obras", o);
-    RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaObrasCategoria.jsp");
-    disp.forward(req,resp);
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+                                  throws ServletException, IOException{
+        String pais = req.getParameter("pais");
+
+        ArrayList<Obra> o = new ObraDAO().getObras_pais(pais);
+        Collections.reverse(o);
+
+        req.setAttribute("obras", o);
+        RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaObrasPais.jsp");
+        disp.forward(req,resp);
     }
 }

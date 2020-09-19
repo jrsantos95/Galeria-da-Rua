@@ -60,8 +60,9 @@ public class Login extends HttpServlet {
                  ArrayList<Obra> o = new ObraDAO().getObras_contem_artista_foto(af.getCod_artistFoto());
                  
                  if(o.size() > 3){//seleciona 3 obras principais
-                    for(int i=3;i < 4; i++){
-                        o.remove(4);
+                    int i = o.size()-1;
+                    for(;i>2;i--){
+                        o.remove(i);
                     }
                  }
                  

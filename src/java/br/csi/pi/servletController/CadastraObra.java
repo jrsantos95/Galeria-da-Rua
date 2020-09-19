@@ -31,8 +31,8 @@ public class CadastraObra extends HttpServlet {
         System.out.println("Método post requisitado ....");
         
         String nome = req.getParameter("nome");
-        //String pais = req.getParameter("pais");
-        //String cidade = req.getParameter("cidade");
+        String pais = req.getParameter("pais");
+        String autor = req.getParameter("autor");
         String linguagem = req.getParameter("linguagem");
         String cor_predominante = req.getParameter("cor_predominante");
         String descricao_obra = req.getParameter("descricao_obra");
@@ -42,7 +42,7 @@ public class CadastraObra extends HttpServlet {
         boolean retorno = new ObraDAO().getObras_teste_nome(af.getCod_artistFoto(), nome);
         
         if(retorno == true){
-            Obra o = new Obra(af.getCod_artistFoto(),nome,cor_predominante,descricao_obra,linguagem);
+            Obra o = new Obra(af.getCod_artistFoto(),nome,cor_predominante,descricao_obra,linguagem,autor,pais);
             boolean retorno2 = new ObraDAO().create(o);
 
             if(retorno2 == false){
@@ -52,8 +52,6 @@ public class CadastraObra extends HttpServlet {
                 RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasComuns/PaginaSucesso.jsp");
                 disp.forward(req,resp);
             }else{
-                    //Obra oCod = new ObraDAO().read2(af.getCod_artistFoto(), nome);
-                    //req.setAttribute("cod_obra", oCod.getCod_obra());
                     RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/views/PaginasArtista/PaginaCadastroObraImagem.html");
                     disp.forward(req,resp);
                 }

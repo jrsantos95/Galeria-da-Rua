@@ -11,7 +11,9 @@ public class Obra {
     private String imagem;
     private String cor_predominante;
     private String descricao_obra;
-    private String linguagem; 
+    private String linguagem;
+    private String autor;
+    private String pais;
     
     //-------------------------------||----------------------------------------
     public Obra(int cod_obra, 
@@ -20,7 +22,9 @@ public class Obra {
                 String cor_predominante, 
                 String descricao_obra, 
                 String linguagem,
-                String imagem) {
+                String imagem,
+                String autor,
+                String pais) {
         this.setCod_obra(cod_obra);
         this.setCod_artist_foto(cod_artist_foto);
         this.setCor_predominante(cor_predominante);
@@ -28,6 +32,8 @@ public class Obra {
         this.setLinguagem(linguagem);
         this.setNome(nome);
         this.setImagem(imagem);
+        this.setAutor(autor);
+        this.setPais(pais);
     }
     
     public Obra(
@@ -36,13 +42,17 @@ public class Obra {
                 String cor_predominante, 
                 String descricao_obra, 
                 String linguagem,
-                String imagem) {
+                String imagem,
+                String autor,
+                String pais) {
         this.setCod_artist_foto(cod_artist_foto);
         this.setCor_predominante(cor_predominante);
         this.setDescricao_obra(descricao_obra);
         this.setLinguagem(linguagem);
         this.setNome(nome);
         this.setImagem(imagem);
+        this.setAutor(autor);
+        this.setPais(pais);
     }
     
     public Obra(
@@ -50,14 +60,34 @@ public class Obra {
                 String nome, 
                 String cor_predominante, 
                 String descricao_obra, 
-                String linguagem) {
+                String linguagem,
+                String autor,
+                String pais) {
         this.setCod_artist_foto(cod_artist_foto);
         this.setCor_predominante(cor_predominante);
         this.setDescricao_obra(descricao_obra);
         this.setLinguagem(linguagem);
         this.setNome(nome);
+        this.setAutor(autor);
+        this.setPais(pais);
     }
-       
+    
+    //-------------------------------||----------------------------------------
+    public String getAutor() {
+        return autor;
+    }
+    private void setAutor(String autor) {
+        this.autor = autor;
+    }
+    
+    //-------------------------------||----------------------------------------
+    public String getPais() {
+        return pais;
+    }
+    private void setPais(String pais) {
+        this.pais = pais;
+    }
+
     //-------------------------------||----------------------------------------
     public int getCod_artist_foto() {
         return this.cod_artist_foto;

@@ -84,6 +84,20 @@
                                   </div> 
                                 </div>
                                 
+                                <div class="was-validated">                            
+                                  <div class="form-group col-md-13 mb-2">
+                                      <label for="validationTooltip01">Autor</label>
+                                      <input type="text" class="form-control" name="autor" placeholder="Autor da Obra" required>
+                                  </div> 
+                                </div>
+                                
+                                <div class="was-validated">                            
+                                  <div class="form-group col-md-13 mb-2">
+                                      <label for="validationTooltip01">Pais</label>
+                                      <input type="text" class="form-control" name="pais" placeholder="Pais da Obra" required>
+                                  </div> 
+                                </div>
+                                
                                 <div class="was-validated"> 
                                     <label for="exampleFormControlSelect1">Linguagem</label>
                                     <select class="form-control" name="linguagem" required>

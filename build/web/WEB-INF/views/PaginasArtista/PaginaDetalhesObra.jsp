@@ -55,6 +55,8 @@
                         <p class="mb-0">Nome da Obra: ${obras.getNome()}</p>
                         <footer class="blockquote-footer">Linguagem: <cite title="Source Title">${obras.getLinguagem()}</cite></footer>
                         <footer class="blockquote-footer">Cor Predominante: <cite title="Source Title">${obras.getCor_predominante()}</cite></footer>
+                        <footer class="blockquote-footer">Autor: <cite title="Source Title">${obras.getAutor()}</cite></footer>
+                        <footer class="blockquote-footer">Pais: <cite title="Source Title">${obras.getPais()}</cite></footer>
                         <footer class="blockquote-footer">Descrição: <cite title="Source Title">${obras.getDescricao_obra()}</cite></footer>
                     </blockquote>
             </c:forEach>

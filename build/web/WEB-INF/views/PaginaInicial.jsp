@@ -120,7 +120,8 @@
                           <div class="col"><a href="http://localhost:8080/PI_GaleriaRua/pg_ObraCategoria?categoria=Poemas" class="btn btn-outline-secondary">Poemas</a></div>
                         </div>
                     </div>
-                <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_ObraCategoria?categoria=VerTodas">[VER TODAS]</a>
+                <!-- <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_ObraCategoria?categoria=VerTodas">[VER TODAS]</a> -->
+                <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_SelecaoPais">[VER POR PAIS]</a>
             </div>
         </div>
     <!-- Pesquisa por lingugens das obras -->

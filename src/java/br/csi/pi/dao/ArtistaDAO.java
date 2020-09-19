@@ -17,9 +17,9 @@ public class ArtistaDAO {
     public int create(ArtistaFotografo af) {
         int cod_usuario = new UsuarioDAO().create(af.getNome(),af.getSenha(),af.getEmail(),af.getIdade(),af.getPais(), af.getCidade(),af.getTipo());                        
         
-        if(cod_usuario == 0){
+        if(cod_usuario == 0){//Testa se já existe esse email
             return 0;
-        }else if(cod_usuario == -1){
+        }else if(cod_usuario == -1){//se não só continua 
                     return -1;
                   }else{
                         try(Connection conn = new ConectaPostgres().getConexao()){

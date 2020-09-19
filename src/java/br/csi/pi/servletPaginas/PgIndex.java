@@ -9,6 +9,7 @@ import br.csi.pi.dao.ObraDAO;
 import br.csi.pi.modelo.Obra;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,33 +29,18 @@ public class PgIndex extends HttpServlet {
         
         ArrayList<Obra> o = new ObraDAO().getObrasTotal();
         ArrayList<Obra> separador = new ObraDAO().getObrasTotal();
+        Collections.reverse(separador);
         
-        int tamanho = o.size();
-        System.out.println("Tamanho: "+tamanho);
-        
-        if(tamanho > 4){
-            tamanho = tamanho/3;
-            
-            int i = 1;
-            int j = 0;
-            for(;i<=tamanho;i++){
-                while(j < (i*3)){
-                    if(j < 3){
-                       separador.remove(j);
-                    }else{
-                       o.remove(j-2);
-                    }
-                    j++;
-                }
-            }  
-        }else if(tamanho == 4){
-            o.remove(3);
+        int i = o.size()-1;
+        for(;i>2;i--){
+            separador.remove(i);
+            o.remove(i);
         }
-        
-        req.setAttribute("obras", o);
-        req.setAttribute("obras2", separador);
+
+        req.setAttribute("obras", separador);
+        req.setAttribute("obras2", o);
         //selecionar obras de 3 em 3
-        
+      
         RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaInicial.jsp");
         disp.forward(req, resp);
     }
