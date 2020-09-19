@@ -204,4 +204,49 @@ public class ObraDAO {
         }
         return true;
     }
+    
+    public ArrayList<Obra> getObrasTotal() {
+        ArrayList<Obra> obra_contem_artista_fotografo = new ArrayList<>();
+        try (Connection conn = new ConectaPostgres().getConexao()) {
+            String sql = "SELECT * FROM obra";
+            PreparedStatement pre = conn.prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            while(rs.next()) {
+                Obra o = new Obra(rs.getInt("cod_obra"), 
+                                  rs.getInt("cod_artist_foto"), 
+                                  rs.getString("nome"),     
+                                  rs.getString("cor_predominante"),     
+                                  rs.getString("descricao_obra"), 
+                                  rs.getString("linguagem"), 
+                                  rs.getString("imagem"));
+                obra_contem_artista_fotografo.add(o);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return obra_contem_artista_fotografo;
+    }
+    
+    public ArrayList<Obra> getObras_linguagem(String linguagem) {
+        ArrayList<Obra> obra_contem_linguagem = new ArrayList<>();
+        try (Connection conn = new ConectaPostgres().getConexao()) {
+            String sql = "SELECT * FROM obra WHERE linguagem = ?";
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, linguagem);
+            ResultSet rs = pre.executeQuery();
+            while(rs.next()) {
+                Obra o = new Obra(rs.getInt("cod_obra"), 
+                                  rs.getInt("cod_artist_foto"), 
+                                  rs.getString("nome"),     
+                                  rs.getString("cor_predominante"),     
+                                  rs.getString("descricao_obra"), 
+                                  rs.getString("linguagem"), 
+                                  rs.getString("imagem"));
+                obra_contem_linguagem.add(o);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return obra_contem_linguagem;
+    }
 }    

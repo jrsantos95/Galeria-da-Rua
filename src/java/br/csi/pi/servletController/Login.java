@@ -2,9 +2,14 @@ package br.csi.pi.servletController;
 
 import br.csi.pi.dao.ArtistaDAO;
 import br.csi.pi.dao.LoginDAO;
+import br.csi.pi.dao.ObraDAO;
 import br.csi.pi.dao.UsuarioDAO;
+import br.csi.pi.modelo.ArtistaFotografo;
+import br.csi.pi.modelo.Obra;
 import br.csi.pi.modelo.Usuario;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,11 +48,24 @@ public class Login extends HttpServlet {
         if(autenticado.equals(apreciador)){
             HttpSession sessao = req.getSession();
             sessao.setAttribute("usuarioLogado", new UsuarioDAO().read(login, senha));
-            
+            ArrayList<Obra> o = new ObraDAO().getObrasTotal();
+            Collections.reverse(o);
+                    
+            sessao.setAttribute("obras", o);
             resp.sendRedirect("http://localhost:8080/PI_GaleriaRua/pg_apreciador");
         }else if(autenticado.equals(artista)){
                  HttpSession sessao = req.getSession();
                  Usuario u = new UsuarioDAO().read(login, senha);
+                 ArtistaFotografo af = new ArtistaDAO().read(u.getCod_usuario());
+                 ArrayList<Obra> o = new ObraDAO().getObras_contem_artista_foto(af.getCod_artistFoto());
+                 
+                 if(o.size() > 3){//seleciona 3 obras principais
+                    for(int i=3;i < 4; i++){
+                        o.remove(4);
+                    }
+                 }
+                 
+                 sessao.setAttribute("obras", o);
                  sessao.setAttribute("usuarioLogado", new ArtistaDAO().read(u.getCod_usuario()));
                  
                  resp.sendRedirect("http://localhost:8080/PI_GaleriaRua/pg_artistaFoto");

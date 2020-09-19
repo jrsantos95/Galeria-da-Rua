@@ -1,9 +1,6 @@
 package br.csi.pi.servletPaginas;
 
-import br.csi.pi.dao.UsuarioDAO;
-import br.csi.pi.modelo.Usuario;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

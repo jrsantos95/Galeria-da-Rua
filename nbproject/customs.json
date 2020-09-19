@@ -1,6 +1,10 @@
 {
     "elements": {
-        "p": {}
+        "p": {
+            "attributes": {
+                "class": {}
+            }
+        }
     },
     "attributes": {
         "integrity": {

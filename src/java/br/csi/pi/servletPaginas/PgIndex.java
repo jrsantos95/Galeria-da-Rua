@@ -5,7 +5,10 @@
  */
 package br.csi.pi.servletPaginas;
 
+import br.csi.pi.dao.ObraDAO;
+import br.csi.pi.modelo.Obra;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +25,37 @@ public class PgIndex extends HttpServlet {
     
     protected void processRequest(HttpServletRequest req, HttpServletResponse resp) 
                                   throws ServletException, IOException{
-        RequestDispatcher disp = req.getRequestDispatcher("index.html");
+        
+        ArrayList<Obra> o = new ObraDAO().getObrasTotal();
+        ArrayList<Obra> separador = new ObraDAO().getObrasTotal();
+        
+        int tamanho = o.size();
+        System.out.println("Tamanho: "+tamanho);
+        
+        if(tamanho > 4){
+            tamanho = tamanho/3;
+            
+            int i = 1;
+            int j = 0;
+            for(;i<=tamanho;i++){
+                while(j < (i*3)){
+                    if(j < 3){
+                       separador.remove(j);
+                    }else{
+                       o.remove(j-2);
+                    }
+                    j++;
+                }
+            }  
+        }else if(tamanho == 4){
+            o.remove(3);
+        }
+        
+        req.setAttribute("obras", o);
+        req.setAttribute("obras2", separador);
+        //selecionar obras de 3 em 3
+        
+        RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/views/PaginaInicial.jsp");
         disp.forward(req, resp);
     }
     

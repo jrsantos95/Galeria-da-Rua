@@ -29,9 +29,9 @@
                   Galeria da Rua
               </a>
               <div class="navbar-nav mr-auto">
-                  <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_artistaFoto">Principal</a>
-                  <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_cadastroObra">Cadastrar Obra</a>
+                  <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_artistaFoto">Perfil</a>
                   <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_ModificaPerfilArtista?cod_usuario=${sessionScope['usuarioLogado'].cod_usuario}">Modificar Perfil</a>
+                  <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_cadastroObra">Cadastrar Obra</a>
                   <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_MostraObras?cod_artisFoto=${sessionScope['usuarioLogado'].cod_artistFoto}">Obras Pessoais</a>
               </div>
           </div>
@@ -92,47 +92,41 @@
         </div>
         <!-- Principais Obras -->
                     
-        <!-- Card's -->
-        <div class="container">
-            <div class="row my-5 mb-5">
-                <div class="card-deck">
-                    <!-- -->               
-                    <div class="card shadow-lg p-0 mb-5 bg-white rounded">
-                        <img src="Imagens/graffiti.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Nome da Obra</h5>
-                        <p class="card-text">Resumo - Dados da Obra:</p>
-                        <p>This is a wider card with supporting text below as a natural lead-in to additional
-                        This content is a little bit longer</p>
-                        <a href="#" class="btn btn-dark stretched-link">Detalhes da obra</a>
-                      </div>
-                    </div>
-                    <!-- -->
-                    <div class="card shadow-lg p-0 mb-5 bg-white rounded">
-                        <img src="Imagens/grafite-arte-urbana-og.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                      </div>
-                      <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                      </div>
-                    </div>
-                    <!-- -->
-                    <div class="card shadow-lg p-0 mb-5 bg-white rounded">
-                        <img src="Imagens/kobra2.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                      </div>
-                      <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                      </div>
-                    </div>
-                </div>
+        
+          
+    <div class="container">
+        <div class="row my-5 mb-5">
+            <div class="card-deck">
+                <c:choose>
+                    <c:when test="${not empty obras}">
+                        <c:forEach var="obras" items="${obras}">
+                                    <c:set var="codigo_lista" value="${codigo_lista+1}"/>
+                                    <div class="card shadow-lg p-0 mb-5 bg-white rounded">
+
+                                        <!-- testar se existe foto se não mostrar foto padrão -->
+                                        <img src="${obras.getImagem()}" width="300" class="card-img-top">
+                                    
+                                      <div class="card-body">
+                                        <h5 class="card-title">${obras.getNome()}</h5>
+                                        <p class="card-text">${obras.getLinguagem()} </p>
+                                        <p class="card-text">${obras.getCor_predominante()}</p>
+                                        <p> ${obras.getDescricao_obra()}</p>
+
+                                        <a href="http://localhost:8080/PI_GaleriaRua/pg_detalhesObra?cod_obra=${obras.getCod_obra()}" class="btn btn-dark">Detalhes</a>
+
+                                        <a href="http://localhost:8080/PI_GaleriaRua/DeletaObra?cod_obra=${obras.getCod_obra()}" class="btn btn-danger">Excluir</a>
+                                      </div>
+                                    </div>
+                                    <!-- -->
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <h1>Artista ainda não cadastrou obras!</h1>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
-        <!-- Card's -->
+    </div>
         
         <!-- Contato Artista -->
         <div class="container">

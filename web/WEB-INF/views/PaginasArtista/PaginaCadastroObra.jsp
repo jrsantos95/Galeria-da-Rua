@@ -26,10 +26,10 @@
                 Galeria da Rua
             </a>
             <div class="navbar-nav mr-auto">
-                <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_artistaFoto">Principal</a>
-                <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_cadastroObra">Cadastrar Obra</a>
-                <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_ModificaPerfilArtista?cod_usuario=${sessionScope['usuarioLogado'].cod_usuario}">Modificar Perfil</a>
-                <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_MostraObras?cod_artisFoto=${sessionScope['usuarioLogado'].cod_artistFoto}">Obras Pessoais</a>
+                  <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_artistaFoto">Perfil</a>
+                  <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_ModificaPerfilArtista?cod_usuario=${sessionScope['usuarioLogado'].cod_usuario}">Modificar Perfil</a>
+                  <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_cadastroObra">Cadastrar Obra</a>
+                  <a class="nav-item nav-link" href="http://localhost:8080/PI_GaleriaRua/pg_MostraObras?cod_artisFoto=${sessionScope['usuarioLogado'].cod_artistFoto}">Obras Pessoais</a>
             </div>
         </div>
         <a>${sessionScope['usuarioLogado'].nome}</a>
@@ -69,13 +69,13 @@
                             <h1>Cadastrar Obra</h1>
                             <p class="mb-3">Dados relativos a obra</p>
                                 
-                                <fieldset disabled>
+                                <!-- <fieldset disabled>
                                     <div class="form-group">
-                                      <label for="disabledTextInput">Codigo</label>
+                                      <label for="disabledTextInput"></label>
                                       <input type="text" placeholder="${sessionScope['usuarioLogado'].cod_artistFoto}"
                                              class="form-control">
                                     </div>
-                                </fieldset>
+                                </fieldset> -->
                             
                                 <div class="was-validated">                            
                                   <div class="form-group col-md-13 mb-2">
@@ -106,24 +106,36 @@
                                     <label for="exampleFormControlSelect1">Cor Predominante</label>
                                     <select class="form-control" name="cor_predominante" required>
                                         <option selected></option>
+                                        <option>Amarelo</option>
+                                        <option>Azul</option>
+                                        <option>Branco</option>
+                                        <option>Beje</option>
+                                        <option>Brilhante</option>
+                                        <option>Bordo</option>
+                                        <option>Bronze</option>
+                                        <option>Verde</option>
                                         <option>Vermelho</option>
-                                        <option>Estêncil</option>
-                                        <option>Poemas</option>
-                                        <option>Adesivos</option>
-                                        <option>Cartazes e/ou Lambe</option>
-                                        <option>Estátuas</option>
-                                        <option>Apresentações e/ou Intervenções</option>
-                                        <option>Instalações Artísticas</option>
-                                        <option>Mosaico</option>
-                                        <option>Projeção de vídeo</option>
-                                        <option>Muralismo</option>
+                                        <option>Preto</option>
+                                        <option>Violeta</option>
+                                        <option>Roxo</option>
+                                        <option>Lilas</option>
+                                        <option>Cinza</option>
+                                        <option>Gelo</option>
+                                        <option>Rosa</option>
+                                        <option>Marrom</option>
+                                        <option>Madeira</option>
+                                        <option>Metal</option>
+                                        <option>Dourado</option>
+                                        <option>Prata</option>
+                                        <option>Laranja</option>
+                                        <option>Mostarda</option>
                                     </select>
                                 </div>
                             
                                 <div class="was-validated"> 
                                     <label>Descrição Obra</label>
                                     <textarea class="form-control" name="descricao_obra" rows="3" 
-                                              placeholder="Descreva-se" required></textarea>
+                                              placeholder="Descreva a obra" required></textarea>
                                 </div>
 
                                 <div class="progress my-4">

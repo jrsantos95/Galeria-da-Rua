@@ -138,21 +138,10 @@
                                         </c:forEach>
                                   </select>
                                 </div>
-
-                                <div class="form-group">
-                                  <label for="exampleFormControlSelect">Estado</label>
-                                  <select multiple class="form-control" name="estado">
-                                        <c:if test="${teste == 50}">
-                                            <c:forEach var="cidades" items="${cidades}">
-                                                <option>${cidades.nome}</option>
-                                            </c:forEach>
-                                        </c:if>
-                                  </select>
-                                </div>
                                 
                                 <div class="form-group"> 
                                     <label for="form18">Cidade</label> 
-                                    <input type="text" class="form-control" name="cidad"> 
+                                    <input type="text" class="form-control" name="cidade"> 
                                 </div>
                                 
                                 <div class="progress my-4">

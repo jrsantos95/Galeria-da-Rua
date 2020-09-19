@@ -75,7 +75,7 @@
 
                                         <a href="http://localhost:8080/PI_GaleriaRua/pg_artistaFoto" class="btn btn-dark">Detalhes</a>
 
-                                        <a href="http://localhost:8080/PI_GaleriaRua/DeletaObra?cod_obra=${obras.getCod_obra()}&pg_gerente=true" class="btn btn-danger">Excluir</a>
+                                        <a href="http://localhost:8080/PI_GaleriaRua/DeletaObraGerente?cod_obra=${obras.getCod_obra()}&pg_gerente=true" class="btn btn-danger">Excluir</a>
                                       </div>
                                     </div>
                                     <!-- -->
